@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>تسجيل الدخول | Lizfar DZ</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+    body {
+      font-family: "Cairo", sans-serif;
+      background-color: #0b1220;
+      background-image: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.03), transparent 2%),
+                        radial-gradient(circle at 90% 90%, rgba(255,255,255,0.02), transparent 2%),
+                        linear-gradient(120deg, rgba(255,255,255,0.03), transparent 10%);
+    }
+    input {
+      background-color: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: white;
+    }
+    input::placeholder { color: rgba(255,255,255,0.4); }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-center text-white p-6">
+
+  <!-- Logo -->
+  <div class="flex items-center mb-8">
+    <div class="w-12 h-12 bg-yellow-400 rounded-lg flex items-center justify-center text-black font-bold text-lg">LZ</div>
+    <h1 class="text-2xl font-semibold mr-3">Lizfar DZ</h1>
+  </div>
+
+  <!-- Login Box -->
+  <div class="w-full max-w-md bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
+    <h2 class="text-xl font-semibold mb-6 text-center">تسجيل الدخول إلى حسابك</h2>
+
+    <form class="space-y-4">
+      <div>
+        <label class="block text-sm mb-1">البريد الإلكتروني أو رقم الهاتف</label>
+        <input id="email" type="text" placeholder="example@gmail.com أو 0550xxxxxx"
+               class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
+      </div>
+
+      <div>
+        <label class="block text-sm mb-1">كلمة المرور</label>
+        <input id="password" type="password" placeholder="••••••••"
+               class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
+      </div>
+
+      <div class="flex items-center justify-between text-sm mt-1">
+        <a href="forgot-password.html" class="text-yellow-400 hover:underline">هل نسيت كلمة المرور؟</a>
+        <a href="signup.html" class="text-gray-300 hover:text-yellow-400">إنشاء حساب جديد</a>
+      </div>
+
+      <button type="submit"
+              class="w-full py-2 bg-yellow-400 text-black rounded-lg font-semibold hover:bg-yellow-300 transition">
+        تسجيل الدخول
+      </button>
+    </form>
+  </div>
+
+  <footer class="mt-10 text-xs text-gray-400">
+    © 2025 Lizfar DZ — كل الحقوق محفوظة
+  </footer>
+
+  <!-- Firebase -->
+  <script type="module" src="firebase-config.js"></script>
+
+  <!-- Login Script -->
+  <script type="module">
+    import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email = form.querySelector("#email").value.trim();
+      const password = form.querySelector("#password").value.trim();
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert("✅ تم تسجيل الدخول بنجاح!");
+        window.location.href = "index.html";
+      } catch (error) {
+        alert("❌ خطأ في تسجيل الدخول: " + error.message);
+      }
+    });
+  </script>
+</body>
+</html>
+
