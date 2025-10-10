@@ -78,13 +78,35 @@
       <p class="text-sm font-medium">شاشة عرض</p>
     </div>
   </div>
-
   <!-- Footer -->
   <footer class="mt-10 text-xs text-gray-400">
     © 2025 Lizfar DZ — كل الحقوق محفوظة
   </footer>
 <script type="module" src="firebase-config.js"></script>
+  <script type="module">
+  import { 
+    signInWithEmailAndPassword 
+  } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+
+  const form = document.querySelector("form");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = form.querySelector("#email").value.trim();
+    const password = form.querySelector("#password").value.trim();
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("✅ تم تسجيل الدخول بنجاح!");
+      window.location.href = "index.html"; // تحويل إلى الصفحة الرئيسية
+    } catch (error) {
+      alert("❌ خطأ في تسجيل الدخول: " + error.message);
+    }
+  });
+</script>
 </body>
 </html>
+
 
 
