@@ -1,163 +1,0 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>إنشاء حساب | Lizfar DZ</title>
-
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
-    body {
-      font-family: "Cairo", sans-serif;
-      background-color: #0b1220;
-      background-image: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.03), transparent 2%),
-                        radial-gradient(circle at 90% 90%, rgba(255,255,255,0.02), transparent 2%),
-                        linear-gradient(120deg, rgba(255,255,255,0.03), transparent 10%);
-      background-blend-mode: overlay;
-    }
-    input, select {
-      background-color: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: white;
-    }
-    input::placeholder { color: rgba(255,255,255,0.4); }
-    select option { color: black; }
-  </style>
-</head>
-
-<body class="min-h-screen flex flex-col items-center justify-center text-white p-6">
-
-  <!-- Logo -->
-  <div class="flex items-center mb-8">
-    <div class="w-12 h-12 bg-yellow-400 rounded-lg flex items-center justify-center text-black font-bold text-lg">LZ</div>
-    <h1 class="text-2xl font-semibold mr-3">Lizfar DZ</h1>
-  </div>
-
-  <!-- Signup Box -->
-  <div class="w-full max-w-lg bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
-    <h2 class="text-xl font-semibold mb-6 text-center">أنشئ حسابك في Lizfar DZ</h2>
-
-    <form action="#" method="POST" class="space-y-4">
-
-      <div>
-        <label class="block text-sm mb-1">الاسم الكامل</label>
-        <input type="text" placeholder="أدخل اسمك الكامل"
-               class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
-      </div>
-
-      <div>
-        <label class="block text-sm mb-1">البريد الإلكتروني أو رقم الهاتف</label>
-        <input type="text" placeholder="example@gmail.com أو 0550xxxxxx"
-               class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
-      </div>
-
-      <div>
-        <label class="block text-sm mb-1">كلمة المرور</label>
-        <input type="password" placeholder="••••••••"
-               class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
-      </div>
-
-      <div>
-        <label class="block text-sm mb-1">مكان الإقامة (الولاية)</label>
-        <select class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
-          <option value="">اختر ولايتك</option>
-          <option>أدرار</option><option>الشلف</option><option>الأغواط</option><option>أم البواقي</option>
-          <option>باتنة</option><option>بجاية</option><option>بسكرة</option><option>بشار</option>
-          <option>البليدة</option><option>البويرة</option><option>تمنراست</option><option>تبسة</option>
-          <option>تلمسان</option><option>تيارت</option><option>تيزي وزو</option><option>الجزائر</option>
-          <option>الجلفة</option><option>جيجل</option><option>سطيف</option><option>سعيدة</option>
-          <option>سكيكدة</option><option>سيدي بلعباس</option><option>عنابة</option><option>قالمة</option>
-          <option>قسنطينة</option><option>المدية</option><option>مستغانم</option><option>المسيلة</option>
-          <option>معسكر</option><option>ورقلة</option><option>وهران</option><option>البيض</option>
-          <option>إليزي</option><option>برج بوعريريج</option><option>بومرداس</option><option>الطارف</option>
-          <option>تندوف</option><option>تيسمسيلت</option><option>الوادي</option><option>خنشلة</option>
-          <option>سوق أهراس</option><option>تيبازة</option><option>ميلة</option><option>عين الدفلى</option>
-          <option>النعامة</option><option>عين تموشنت</option><option>غرداية</option><option>غليزان</option>
-          <option>تيميمون</option><option>برج باجي مختار</option><option>أولاد جلال</option><option>بني عباس</option>
-          <option>عين صالح</option><option>عين قزام</option><option>تقرت</option><option>جانت</option>
-          <option>المغير</option><option>المنيعة</option>
-        </select>
-      </div>
-
-      <div>
-        <label class="block text-sm mb-1">العمر</label>
-        <input type="number" min="12" max="100" placeholder="عمرك"
-               class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
-      </div>
-
-      <button type="submit"
-              class="w-full py-2 bg-yellow-400 text-black rounded-lg font-semibold hover:bg-yellow-300 transition">
-        إنشاء حسابي في Lizfar DZ
-      </button>
-
-      <p class="text-center text-sm mt-3">
-        لديك حساب؟ 
-        <a href="login.html" class="text-yellow-400 hover:underline">تسجيل الدخول</a>
-      </p>
-    </form>
-  </div>
-
-  <!-- Product preview -->
-  <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-10 max-w-3xl">
-    <div class="bg-white/10 p-4 rounded-xl text-center">
-      <div class="h-24 bg-black/30 rounded-md mb-2 flex items-center justify-center text-xs text-gray-400">صورة المنتج</div>
-      <p class="text-sm font-medium">لاب توب جديد</p>
-    </div>
-    <div class="bg-white/10 p-4 rounded-xl text-center">
-      <div class="h-24 bg-black/30 rounded-md mb-2 flex items-center justify-center text-xs text-gray-400">صورة المنتج</div>
-      <p class="text-sm font-medium">هاتف ذكي</p>
-    </div>
-    <div class="bg-white/10 p-4 rounded-xl text-center hidden sm:block">
-      <div class="h-24 bg-black/30 rounded-md mb-2 flex items-center justify-center text-xs text-gray-400">صورة المنتج</div>
-      <p class="text-sm font-medium">سماعة بلوتوث</p>
-    </div>
-  </div>
-  <!-- Footer -->
-  <footer class="mt-10 text-xs text-gray-400">
-    © 2025 Lizfar DZ — كل الحقوق محفوظة
-  </footer> 
-<script type="module" src="firebase-config.js"></script>
-<script type="module">
-  import { 
-    createUserWithEmailAndPassword 
-  } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
-
-  // تحديد الحقول من الصفحة
-  const form = document.querySelector("form");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const name = form.querySelector("#fullname").value.trim();
-    const email = form.querySelector("#email").value.trim();
-    const password = form.querySelector("#password").value.trim();
-    const location = form.querySelector("#wilaya").value;
-    const age = form.querySelector("#age").value;
-
-    try {
-      // إنشاء المستخدم في Firebase Auth
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-
-      // تخزين بيانات إضافية في Firestore
-      await setDoc(doc(db, "users", user.uid), {
-        name,
-        email,
-        location,
-        age,
-        createdAt: new Date()
-      });
-
-      alert("🎉 تم إنشاء الحساب بنجاح!");
-      window.location.href = "login.html";
-    } catch (error) {
-      alert("حدث خطأ: " + error.message);
-    }
-  });
-</script>
-</body>
-</html>
-
-
