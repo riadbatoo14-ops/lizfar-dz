@@ -114,12 +114,50 @@
       <p class="text-sm font-medium">سماعة بلوتوث</p>
     </div>
   </div>
-
   <!-- Footer -->
   <footer class="mt-10 text-xs text-gray-400">
     © 2025 Lizfar DZ — كل الحقوق محفوظة
   </footer> 
 <script type="module" src="firebase-config.js"></script>
+<script type="module">
+  import { 
+    createUserWithEmailAndPassword 
+  } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+
+  // تحديد الحقول من الصفحة
+  const form = document.querySelector("form");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const name = form.querySelector("#fullname").value.trim();
+    const email = form.querySelector("#email").value.trim();
+    const password = form.querySelector("#password").value.trim();
+    const location = form.querySelector("#wilaya").value;
+    const age = form.querySelector("#age").value;
+
+    try {
+      // إنشاء المستخدم في Firebase Auth
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // تخزين بيانات إضافية في Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        name,
+        email,
+        location,
+        age,
+        createdAt: new Date()
+      });
+
+      alert("🎉 تم إنشاء الحساب بنجاح!");
+      window.location.href = "login.html";
+    } catch (error) {
+      alert("حدث خطأ: " + error.message);
+    }
+  });
+</script>
 </body>
 </html>
+
 
