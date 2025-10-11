@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ليزفار DZ — الصفحة الرئيسية</title>
 
-  <!-- Tailwind CDN -->
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
@@ -20,7 +20,6 @@
     .side-item:hover { background: rgba(255,255,255,0.03); }
     .chev { transition: transform .25s ease; }
     .chev.open { transform: rotate(-90deg); }
-    select option { color: black; }
   </style>
 </head>
 
@@ -50,19 +49,19 @@
             </svg>
           </button>
           <div class="pc-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-            <button data-filter="pc-builds" class="w-full text-right px-3 py-2 rounded-md side-item">تجميعات</button>
-            <button data-filter="pc-gpu" class="w-full text-right px-3 py-2 rounded-md side-item">كروت شاشة</button>
-            <button data-filter="pc-cpu" class="w-full text-right px-3 py-2 rounded-md side-item">معالجات</button>
-            <button data-filter="pc-ram" class="w-full text-right px-3 py-2 rounded-md side-item">رامات</button>
-            <button data-filter="pc-mobo" class="w-full text-right px-3 py-2 rounded-md side-item">كروت أم</button>
-            <button data-filter="pc-cooler" class="w-full text-right px-3 py-2 rounded-md side-item">مراوح تبريد</button>
-            <button data-filter="pc-storage" class="w-full text-right px-3 py-2 rounded-md side-item">SSD / HDD</button>
-            <button data-filter="pc-psu" class="w-full text-right px-3 py-2 rounded-md side-item">وحدة الطاقة</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">تجميعات</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">كروت شاشة</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">معالجات</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">رامات</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">كروت أم</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">مراوح تبريد</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">SSD / HDD</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">وحدة الطاقة</button>
           </div>
         </div>
 
         <!-- Laptop -->
-        <button data-filter="laptop" class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">Laptop</button>
+        <button class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">Laptop</button>
 
         <!-- Phones -->
         <div>
@@ -73,12 +72,12 @@
             </svg>
           </button>
           <div class="phone-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-            <button data-filter="phone-samsung" class="w-full text-right px-3 py-2 rounded-md side-item">Samsung</button>
-            <button data-filter="phone-xiaomi" class="w-full text-right px-3 py-2 rounded-md side-item">Xiaomi</button>
-            <button data-filter="phone-huawei" class="w-full text-right px-3 py-2 rounded-md side-item">Huawei</button>
-            <button data-filter="phone-oppo" class="w-full text-right px-3 py-2 rounded-md side-item">Oppo</button>
-            <button data-filter="phone-infinix" class="w-full text-right px-3 py-2 rounded-md side-item">Infinix</button>
-            <button data-filter="phone-iphone" class="w-full text-right px-3 py-2 rounded-md side-item">iPhone</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">Samsung</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">Xiaomi</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">Huawei</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">Oppo</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">Infinix</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">iPhone</button>
           </div>
         </div>
 
@@ -91,27 +90,27 @@
             </svg>
           </button>
           <div class="acc-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-            <button data-filter="acc-mouse" class="w-full text-right px-3 py-2 rounded-md side-item">فأرة</button>
-            <button data-filter="acc-keyboard" class="w-full text-right px-3 py-2 rounded-md side-item">لوحة مفاتيح</button>
-            <button data-filter="acc-headset" class="w-full text-right px-3 py-2 rounded-md side-item">سماعات</button>
-            <button data-filter="acc-pc" class="w-full text-right px-3 py-2 rounded-md side-item">إكسسوارات الحاسوب</button>
-            <button data-filter="acc-phone" class="w-full text-right px-3 py-2 rounded-md side-item">إكسسوارات الهاتف</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">فأرة</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">لوحة مفاتيح</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">سماعات</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">إكسسوارات الحاسوب</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">إكسسوارات الهاتف</button>
           </div>
         </div>
 
         <!-- Screens -->
-        <button data-filter="screens" class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">شاشات</button>
+        <button class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">شاشات</button>
       </nav>
     </aside>
 
     <!-- Main -->
     <main class="flex-1 p-6 lg:pl-8">
-      <!-- Header -->
       <header class="flex items-center justify-between mb-8">
         <h1 class="text-xl font-semibold">مرحبا بك في Lizfar DZ</h1>
         <div class="flex items-center gap-3">
-          <a href="signup.html" class="px-4 py-2 rounded-full bg-yellow-400 text-black font-semibold">إنشاء حساب</a>
-          <a href="login.html" class="px-4 py-2 rounded-full bg-white/6">تسجيل الدخول</a>
+          <a id="signup-btn" href="signup.html" class="px-4 py-2 rounded-full bg-yellow-400 text-black font-semibold">إنشاء حساب</a>
+          <a id="login-btn" href="login.html" class="px-4 py-2 rounded-full bg-white/10">تسجيل الدخول</a>
+          <button id="logout-btn" class="px-4 py-2 rounded-full bg-red-500 text-white font-semibold hidden">تسجيل الخروج</button>
         </div>
       </header>
 
@@ -124,14 +123,12 @@
             <p class="text-gray-400">معالج Ryzen + بطاقة RTX</p>
             <span class="text-yellow-400 font-semibold mt-2 inline-block">120,000 دج</span>
           </div>
-
           <div class="bg-white/10 rounded-xl p-4">
             <div class="h-48 bg-black/30 rounded-md flex items-center justify-center">صورة المنتج</div>
             <h3 class="mt-3 text-lg font-bold">هاتف Samsung A55</h3>
             <p class="text-gray-400">كاميرا 64MP - شاشة Super AMOLED</p>
             <span class="text-yellow-400 font-semibold mt-2 inline-block">65,000 دج</span>
           </div>
-
           <div class="bg-white/10 rounded-xl p-4">
             <div class="h-48 bg-black/30 rounded-md flex items-center justify-center">صورة المنتج</div>
             <h3 class="mt-3 text-lg font-bold">شاشة 27 بوصة</h3>
@@ -147,8 +144,8 @@
     </main>
   </div>
 
+  <!-- Scripts -->
   <script>
-    // تفعيل القوائم الفرعية
     const toggle = (btnClass, subClass) => {
       const btn = document.querySelector(btnClass);
       const sub = document.querySelector(subClass);
@@ -161,6 +158,36 @@
     toggle('.pc-toggle', '.pc-submenu');
     toggle('.phone-toggle', '.phone-submenu');
     toggle('.acc-toggle', '.acc-submenu');
+  </script>
+
+  <!-- Firebase Auth -->
+  <script type="module">
+    import { auth } from "./firebase-config.js";
+    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+
+    const loginBtn = document.getElementById("login-btn");
+    const signupBtn = document.getElementById("signup-btn");
+    const logoutBtn = document.getElementById("logout-btn");
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // مستخدم داخل الموقع
+        loginBtn.style.display = "none";
+        signupBtn.style.display = "none";
+        logoutBtn.classList.remove("hidden");
+      } else {
+        // لم يسجّل الدخول
+        loginBtn.style.display = "inline-block";
+        signupBtn.style.display = "inline-block";
+        logoutBtn.classList.add("hidden");
+      }
+    });
+
+    logoutBtn.addEventListener("click", async () => {
+      await signOut(auth);
+      alert("تم تسجيل الخروج بنجاح ✅");
+      window.location.href = "index.html";
+    });
   </script>
 </body>
 </html>
