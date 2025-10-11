@@ -37,8 +37,15 @@
       <p><span class="text-yellow-400 font-semibold">🎂 العمر:</span> <span id="userAge">...</span></p>
     </div>
 
+    <!-- 🔙 زر العودة إلى الصفحة الرئيسية -->
+    <a href="index.html"
+       class="block w-full mt-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition">
+      العودة إلى الصفحة الرئيسية
+    </a>
+
+    <!-- 🚪 زر تسجيل الخروج -->
     <button id="logoutBtn"
-            class="w-full mt-6 py-2 bg-yellow-400 text-black rounded-lg font-semibold hover:bg-yellow-300 transition">
+            class="w-full mt-3 py-2 bg-yellow-400 text-black rounded-lg font-semibold hover:bg-yellow-300 transition">
       تسجيل الخروج
     </button>
   </div>
@@ -59,31 +66,39 @@
     const userAge = document.getElementById("userAge");
     const logoutBtn = document.getElementById("logoutBtn");
 
-    // التحقق من تسجيل الدخول
+    // ✅ التحقق من تسجيل الدخول وتحميل بيانات المستخدم
     onAuthStateChanged(auth, async (user) => {
       if (!user) {
         window.location.href = "login.html";
         return;
       }
 
-      const docRef = doc(db, "users", user.uid);
-      const docSnap = await getDoc(docRef);
+      try {
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
 
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        userName.textContent = data.name;
-        userEmail.textContent = data.email;
-        userLocation.textContent = data.location;
-        userAge.textContent = data.age;
-      } else {
-        alert("⚠️ لا توجد بيانات لهذا المستخدم.");
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          userName.textContent = data.name || "غير محدد";
+          userEmail.textContent = data.email || user.email;
+          userLocation.textContent = data.location || "غير محدد";
+          userAge.textContent = data.age || "غير محدد";
+        } else {
+          userEmail.textContent = user.email;
+          userName.textContent = "مستخدم جديد";
+          userLocation.textContent = "غير محدد";
+          userAge.textContent = "غير محدد";
+        }
+      } catch (err) {
+        alert("⚠️ خطأ في تحميل البيانات: " + err.message);
       }
     });
 
-    // تسجيل الخروج
+    // 🚪 تسجيل الخروج + العودة إلى الصفحة الرئيسية بعد الخروج
     logoutBtn.addEventListener("click", async () => {
       await signOut(auth);
-      window.location.href = "login.html";
+      alert("👋 تم تسجيل الخروج بنجاح!");
+      window.location.href = "index.html";
     });
   </script>
 </body>
