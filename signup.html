@@ -37,7 +37,7 @@
   <div class="w-full max-w-md bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
     <h2 class="text-xl font-semibold mb-6 text-center">إنشاء حساب جديد</h2>
 
-    <form class="space-y-4">
+    <form id="signupForm" class="space-y-4">
       <div>
         <label class="block text-sm mb-1">الاسم الكامل</label>
         <input id="fullname" type="text" placeholder="الاسم الكامل"
@@ -45,8 +45,8 @@
       </div>
 
       <div>
-        <label class="block text-sm mb-1">البريد الإلكتروني</label>
-        <input id="email" type="email" placeholder="example@gmail.com"
+        <label class="block text-sm mb-1">البريد الإلكتروني أو رقم الهاتف</label>
+        <input id="contact" type="text" placeholder="example@gmail.com أو +213xxxxxxxxx"
                class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
       </div>
 
@@ -56,7 +56,6 @@
                class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
       </div>
 
-      <!-- قائمة الولايات -->
       <div>
         <label class="block text-sm mb-1">مكان الإقامة (الولاية)</label>
         <select id="wilaya" class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
@@ -71,7 +70,6 @@
           <option>18 - جيجل</option>
           <option>47 - غرداية</option>
           <option>48 - غليزان</option>
-          <!-- يمكنك إضافة باقي الولايات -->
         </select>
       </div>
 
@@ -80,6 +78,9 @@
         <input id="age" type="number" min="10" max="99" placeholder="عمرك"
                class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
       </div>
+
+      <!-- reCAPTCHA -->
+      <div id="recaptcha-container" class="my-3"></div>
 
       <button type="submit"
               class="w-full py-2 bg-yellow-400 text-black rounded-lg font-semibold hover:bg-yellow-300 transition">
@@ -99,46 +100,60 @@
   <!-- Firebase -->
   <script type="module">
     import { auth, db } from "./firebase-config.js";
-    import { createUserWithEmailAndPassword, sendEmailVerification } 
-      from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+    import {
+      createUserWithEmailAndPassword,
+      sendEmailVerification,
+      RecaptchaVerifier,
+      signInWithPhoneNumber
+    } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
     import { setDoc, doc } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
 
-    const form = document.querySelector("form");
+    const form = document.getElementById("signupForm");
+
+    // إعداد reCAPTCHA
+    const appVerifier = new RecaptchaVerifier(auth, "recaptcha-container", {
+      size: "invisible",
+      callback: (response) => {
+        console.log("✅ reCAPTCHA verified");
+      }
+    });
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       const name = form.querySelector("#fullname").value.trim();
-      const email = form.querySelector("#email").value.trim();
+      const contact = form.querySelector("#contact").value.trim();
       const password = form.querySelector("#password").value.trim();
       const location = form.querySelector("#wilaya").value;
       const age = form.querySelector("#age").value;
 
-      if (!name || !email || !password || !location || !age) {
+      if (!name || !contact || !password || !location || !age) {
         alert("⚠️ يرجى ملء جميع الخانات");
         return;
       }
 
       try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
+        if (contact.includes("@")) {
+          // 📧 تسجيل بالبريد الإلكتروني
+          const userCredential = await createUserWithEmailAndPassword(auth, contact, password);
+          const user = userCredential.user;
+          await sendEmailVerification(user);
+          await setDoc(doc(db, "users", user.uid), { name, email: contact, location, age, createdAt: new Date() });
+          alert("✅ تم إنشاء الحساب! تحقق من بريدك الإلكتروني لتفعيل الحساب.");
+          window.location.href = "login.html";
+        } else {
+          // 📱 تسجيل برقم الهاتف
+          const confirmationResult = await signInWithPhoneNumber(auth, contact, appVerifier);
+          const code = prompt("📲 أدخل رمز التحقق المرسل إلى هاتفك:");
+          const result = await confirmationResult.confirm(code);
+          const user = result.user;
 
-        // حفظ البيانات في Firestore
-        await setDoc(doc(db, "users", user.uid), {
-          name,
-          email,
-          location,
-          age,
-          createdAt: new Date()
-        });
-
-        // إرسال رسالة تحقق بالبريد الإلكتروني
-        await sendEmailVerification(user);
-        alert("✅ تم إنشاء الحساب! تحقق من بريدك الإلكتروني لتفعيل الحساب.");
-
-        window.location.href = "login.html";
+          await setDoc(doc(db, "users", user.uid), { name, phone: contact, location, age, createdAt: new Date() });
+          alert("🎉 تم إنشاء الحساب بنجاح!");
+          window.location.href = "login.html";
+        }
       } catch (error) {
-        alert("❌ حدث خطأ: " + error.message);
+        alert("❌ خطأ: " + error.message);
       }
     });
   </script>
