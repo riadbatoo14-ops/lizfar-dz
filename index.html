@@ -1,192 +1,116 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ليزفار DZ — الصفحة الرئيسية</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>الرئيسية | Lizfar DZ</title>
 
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
-    body { font-family: "Cairo", sans-serif; background-color: #0b1220; }
-    .bg-tech {
-      background-image:
-        radial-gradient(circle at 10% 10%, rgba(255,255,255,0.02), transparent 2%),
-        radial-gradient(circle at 90% 90%, rgba(255,255,255,0.01), transparent 2%),
-        linear-gradient(120deg, rgba(255,255,255,0.02), transparent 10%);
-      background-blend-mode: overlay;
+    body {
+      font-family: "Cairo", sans-serif;
+      background-color: #0b1220;
+      background-image: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.03), transparent 2%),
+                        radial-gradient(circle at 90% 90%, rgba(255,255,255,0.02), transparent 2%),
+                        linear-gradient(120deg, rgba(255,255,255,0.03), transparent 10%);
+      color: white;
     }
-    .side-item:hover { background: rgba(255,255,255,0.03); }
-    .chev { transition: transform .25s ease; }
-    .chev.open { transform: rotate(-90deg); }
   </style>
 </head>
 
-<body class="min-h-screen text-white bg-gradient-to-br from-gray-900 via-gray-800 to-black bg-tech">
-  <div class="min-h-screen flex">
+<body class="min-h-screen flex flex-col">
 
-    <!-- Sidebar -->
-    <aside class="w-72 bg-gray-900/70 border-r border-white/5 p-4 hidden lg:block">
-      <div class="flex items-center gap-3 mb-6">
-        <div class="w-12 h-12 rounded-lg bg-yellow-400 flex items-center justify-center text-black font-bold">LZ</div>
-        <div>
-          <h1 class="text-lg font-semibold">ليزفار DZ</h1>
-          <p class="text-xs text-gray-400">سوق الأجهزة وقطع الحاسوب</p>
-        </div>
-      </div>
+  <!-- 🔝 الشريط العلوي -->
+  <header class="flex items-center justify-between px-6 py-4 bg-white/10 backdrop-blur-sm shadow-md">
+    <div class="flex items-center space-x-3 space-x-reverse">
+      <div class="w-10 h-10 bg-yellow-400 rounded-lg flex items-center justify-center text-black font-bold text-lg">LZ</div>
+      <h1 class="text-xl font-semibold">Lizfar DZ</h1>
+    </div>
 
-      <!-- Navigation -->
-      <nav class="space-y-2 overflow-auto" style="max-height:calc(100vh - 160px);">
-        <button data-filter="all" class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">أحدث المنتجات</button>
+    <nav class="flex items-center space-x-4 space-x-reverse">
+      <!-- 👋 اسم المستخدم -->
+      <span id="userNameDisplay" class="hidden text-gray-200 text-sm"></span>
 
-        <!-- PC -->
-        <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium pc-toggle">
-            <span>PC</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
-            </svg>
-          </button>
-          <div class="pc-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">تجميعات</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">كروت شاشة</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">معالجات</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">رامات</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">كروت أم</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">مراوح تبريد</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">SSD / HDD</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">وحدة الطاقة</button>
-          </div>
-        </div>
+      <!-- زر ملفي الشخصي -->
+      <a id="profileBtn" href="profile.html"
+         class="px-4 py-2 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-400 transition hidden">
+         ملفي الشخصي
+      </a>
 
-        <!-- Laptop -->
-        <button class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">Laptop</button>
+      <!-- زر تسجيل الدخول -->
+      <a id="loginBtn" href="login.html"
+         class="px-4 py-2 bg-yellow-400 text-black rounded-lg font-semibold hover:bg-yellow-300 transition hidden">
+         تسجيل الدخول
+      </a>
 
-        <!-- Phones -->
-        <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium phone-toggle">
-            <span>هواتف</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
-            </svg>
-          </button>
-          <div class="phone-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">Samsung</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">Xiaomi</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">Huawei</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">Oppo</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">Infinix</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">iPhone</button>
-          </div>
-        </div>
+      <!-- زر تسجيل الخروج -->
+      <button id="logoutBtn"
+              class="px-4 py-2 bg-red-500/90 hover:bg-red-500 rounded-lg font-semibold hidden">
+        تسجيل الخروج
+      </button>
+    </nav>
+  </header>
 
-        <!-- Accessories -->
-        <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium acc-toggle">
-            <span>إكسسوارات</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
-            </svg>
-          </button>
-          <div class="acc-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">فأرة</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">لوحة مفاتيح</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">سماعات</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">إكسسوارات الحاسوب</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">إكسسوارات الهاتف</button>
-          </div>
-        </div>
+  <!-- 🏠 محتوى الصفحة -->
+  <main class="flex-1 flex flex-col items-center justify-center text-center p-8">
+    <h2 class="text-3xl font-bold mb-4">مرحبًا بك في <span class="text-yellow-400">Lizfar DZ</span></h2>
+    <p class="text-gray-300 max-w-lg leading-relaxed">
+      موقع جزائري يقدم منتجات وخدمات مميزة مستوحاة من واقعنا المحلي.  
+      اكتشف عروضنا وابدأ رحلتك معنا اليوم ✨
+    </p>
 
-        <!-- Screens -->
-        <button class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">شاشات</button>
-      </nav>
-    </aside>
+    <a href="products.html"
+       class="mt-6 px-6 py-2 bg-yellow-400 text-black rounded-lg font-semibold hover:bg-yellow-300 transition">
+       استعرض المنتجات
+    </a>
+  </main>
 
-    <!-- Main -->
-    <main class="flex-1 p-6 lg:pl-8">
-      <header class="flex items-center justify-between mb-8">
-        <h1 class="text-xl font-semibold">مرحبا بك في Lizfar DZ</h1>
-        <div class="flex items-center gap-3">
-          <a id="signup-btn" href="signup.html" class="px-4 py-2 rounded-full bg-yellow-400 text-black font-semibold">إنشاء حساب</a>
-          <a id="login-btn" href="login.html" class="px-4 py-2 rounded-full bg-white/10">تسجيل الدخول</a>
-          <button id="logout-btn" class="px-4 py-2 rounded-full bg-red-500 text-white font-semibold hidden">تسجيل الخروج</button>
-        </div>
-      </header>
+  <footer class="text-center text-gray-400 text-xs py-4">
+    © 2025 Lizfar DZ — كل الحقوق محفوظة
+  </footer>
 
-      <section>
-        <h2 class="text-2xl font-semibold mb-4">منتجات مختارة</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-white/10 rounded-xl p-4">
-            <div class="h-48 bg-black/30 rounded-md flex items-center justify-center">صورة المنتج</div>
-            <h3 class="mt-3 text-lg font-bold">حاسوب ألعاب متكامل</h3>
-            <p class="text-gray-400">معالج Ryzen + بطاقة RTX</p>
-            <span class="text-yellow-400 font-semibold mt-2 inline-block">120,000 دج</span>
-          </div>
-          <div class="bg-white/10 rounded-xl p-4">
-            <div class="h-48 bg-black/30 rounded-md flex items-center justify-center">صورة المنتج</div>
-            <h3 class="mt-3 text-lg font-bold">هاتف Samsung A55</h3>
-            <p class="text-gray-400">كاميرا 64MP - شاشة Super AMOLED</p>
-            <span class="text-yellow-400 font-semibold mt-2 inline-block">65,000 دج</span>
-          </div>
-          <div class="bg-white/10 rounded-xl p-4">
-            <div class="h-48 bg-black/30 rounded-md flex items-center justify-center">صورة المنتج</div>
-            <h3 class="mt-3 text-lg font-bold">شاشة 27 بوصة</h3>
-            <p class="text-gray-400">دقة 2K - معدل تحديث 144Hz</p>
-            <span class="text-yellow-400 font-semibold mt-2 inline-block">48,000 دج</span>
-          </div>
-        </div>
-      </section>
-
-      <footer class="text-xs text-gray-400 mt-12">
-        © 2025 Lizfar DZ — كل الحقوق محفوظة
-      </footer>
-    </main>
-  </div>
-
-  <!-- Scripts -->
-  <script>
-    const toggle = (btnClass, subClass) => {
-      const btn = document.querySelector(btnClass);
-      const sub = document.querySelector(subClass);
-      const chev = btn.querySelector('.chev');
-      btn.addEventListener('click', () => {
-        sub.classList.toggle('hidden');
-        chev.classList.toggle('open');
-      });
-    };
-    toggle('.pc-toggle', '.pc-submenu');
-    toggle('.phone-toggle', '.phone-submenu');
-    toggle('.acc-toggle', '.acc-submenu');
-  </script>
-
-  <!-- Firebase Auth -->
+  <!-- 🔥 Firebase -->
   <script type="module">
-    import { auth } from "./firebase-config.js";
+    import { auth, db } from "./firebase-config.js";
     import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
 
-    const loginBtn = document.getElementById("login-btn");
-    const signupBtn = document.getElementById("signup-btn");
-    const logoutBtn = document.getElementById("logout-btn");
+    const loginBtn = document.getElementById("loginBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const userNameDisplay = document.getElementById("userNameDisplay");
+    const profileBtn = document.getElementById("profileBtn");
 
-    onAuthStateChanged(auth, (user) => {
+    // 👀 راقب حالة المستخدم
+    onAuthStateChanged(auth, async (user) => {
       if (user) {
-        // مستخدم داخل الموقع
-        loginBtn.style.display = "none";
-        signupBtn.style.display = "none";
+        // ✅ المستخدم مسجل دخول
+        loginBtn.classList.add("hidden");
         logoutBtn.classList.remove("hidden");
+        profileBtn.classList.remove("hidden");
+
+        // جلب الاسم من Firestore
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          userNameDisplay.textContent = `مرحبًا، ${data.name} 👋`;
+          userNameDisplay.classList.remove("hidden");
+        }
       } else {
-        // لم يسجّل الدخول
-        loginBtn.style.display = "inline-block";
-        signupBtn.style.display = "inline-block";
+        // ❌ المستخدم غير مسجل
+        loginBtn.classList.remove("hidden");
         logoutBtn.classList.add("hidden");
+        profileBtn.classList.add("hidden");
+        userNameDisplay.classList.add("hidden");
       }
     });
 
+    // 🔴 زر تسجيل الخروج
     logoutBtn.addEventListener("click", async () => {
       await signOut(auth);
-      alert("تم تسجيل الخروج بنجاح ✅");
-      window.location.href = "index.html";
+      alert("✅ تم تسجيل الخروج بنجاح");
+      window.location.reload();
     });
   </script>
 </body>
