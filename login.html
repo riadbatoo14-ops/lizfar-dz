@@ -58,6 +58,12 @@
               class="w-full py-2 bg-yellow-400 text-black rounded-lg font-semibold hover:bg-yellow-300 transition">
         تسجيل الدخول
       </button>
+
+      <!-- 🔙 زر العودة إلى الصفحة الرئيسية -->
+      <a href="index.html" 
+         class="block w-full text-center mt-3 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition">
+         العودة إلى الصفحة الرئيسية
+      </a>
     </form>
   </div>
 
@@ -74,26 +80,4 @@
     const form = document.querySelector("form");
 
     // ✅ إذا المستخدم مسجل دخول من قبل → نرسله للملف الشخصي مباشرة
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        window.location.href = "profile.html";
-      }
-    });
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const email = form.querySelector("#email").value.trim();
-      const password = form.querySelector("#password").value.trim();
-
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-        alert("✅ تم تسجيل الدخول بنجاح!");
-        window.location.href = "profile.html";
-      } catch (error) {
-        alert("❌ خطأ في تسجيل الدخول: " + error.message);
-      }
-    });
-  </script>
-</body>
-</html>
+    onAuthStateChanged(a
