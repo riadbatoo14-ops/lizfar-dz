@@ -1,9 +1,11 @@
 // firebase-config.js
+// إعداد اتصال موقع Lizfar DZ مع Firebase
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-analytics.js";
 
+// ⚙️ إعدادات مشروعك في Firebase Console
 const firebaseConfig = {
   apiKey: "AIzaSyD7kYFIZ0xyv07Dk45KbeoDfnkDnm15Hpk",
   authDomain: "lizfar-dz.firebaseapp.com",
@@ -14,11 +16,14 @@ const firebaseConfig = {
   measurementId: "G-ZDRSNRSMRN"
 };
 
-// Initialize Firebase
+// 🔥 تهيئة التطبيق
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+
+// 💡 تهيئة خدمات Firebase الأساسية
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// اجعلهم متاحين لباقي الملفات
-export { auth, db };
+// ✅ تصديرها لتعمل في جميع الصفحات
+export { app, auth, db };
+
+console.log("✅ Lizfar DZ متصل بنجاح بـ Firebase!");
