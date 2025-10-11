@@ -36,7 +36,7 @@
   <div class="w-full max-w-md bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
     <h2 class="text-xl font-semibold mb-6 text-center">تسجيل الدخول إلى حسابك</h2>
 
-    <form class="space-y-4">
+    <form id="loginForm" class="space-y-4">
       <div>
         <label class="block text-sm mb-1">البريد الإلكتروني</label>
         <input id="email" type="email" placeholder="example@gmail.com"
@@ -77,7 +77,50 @@
     import { signInWithEmailAndPassword, onAuthStateChanged } 
       from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
-    const form = document.querySelector("form");
+    const form = document.getElementById("loginForm");
 
-    // ✅ إذا المستخدم مسجل دخول من قبل → نرسله للملف الشخصي مباشرة
-    onAuthStateChanged(a
+    // ✅ إذا المستخدم مسجل دخول مسبقًا → إعادة توجيهه مباشرة
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        window.location.href = "index.html";
+      }
+    });
+
+    // ✅ عند تسجيل الدخول
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email = form.querySelector("#email").value.trim();
+      const password = form.querySelector("#password").value.trim();
+
+      if (!email || !password) {
+        alert("⚠️ يرجى إدخال البريد الإلكتروني وكلمة المرور");
+        return;
+      }
+
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        if (!user.emailVerified) {
+          alert("⚠️ يرجى تفعيل بريدك الإلكتروني قبل تسجيل الدخول.");
+          return;
+        }
+
+        alert("✅ تم تسجيل الدخول بنجاح!");
+        window.location.href = "index.html";
+      } catch (error) {
+        if (error.code === "auth/user-not-found") {
+          alert("❌ المستخدم غير موجود.");
+        } else if (error.code === "auth/wrong-password") {
+          alert("❌ كلمة المرور غير صحيحة.");
+        } else if (error.code === "auth/invalid-email") {
+          alert("⚠️ البريد الإلكتروني غير صالح.");
+        } else {
+          alert("❌ خطأ: " + error.message);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
