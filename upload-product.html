@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>إضافة منتج | Lizfar DZ</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+    body {
+      font-family: "Cairo", sans-serif;
+      background-color: #0b1220;
+      background-image: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.03), transparent 2%),
+                        radial-gradient(circle at 90% 90%, rgba(255,255,255,0.02), transparent 2%),
+                        linear-gradient(120deg, rgba(255,255,255,0.03), transparent 10%);
+      color: white;
+    }
+    input, textarea, select {
+      background-color: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+    }
+    input::placeholder, textarea::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+    select option { color: black; }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-center p-6">
+
+  <div class="flex items-center mb-8">
+    <div class="w-12 h-12 bg-yellow-400 rounded-lg flex items-center justify-center text-black font-bold text-lg">LZ</div>
+    <h1 class="text-2xl font-semibold mr-3">إضافة منتج جديد</h1>
+  </div>
+
+  <div class="w-full max-w-lg bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
+    <form id="productForm" class="space-y-4">
+
+      <div>
+        <label class="block text-sm mb-1">اسم المنتج</label>
+        <input id="productName" type="text" placeholder="مثال: هاتف Samsung A55"
+               class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
+      </div>
+
+      <div>
+        <label class="block text-sm mb-1">الوصف</label>
+        <textarea id="productDesc" rows="3" placeholder="صف المنتج بالتفصيل..."
+                  class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"></textarea>
+      </div>
+
+      <div>
+        <label class="block text-sm mb-1">السعر (دج)</label>
+        <input id="productPrice" type="number" placeholder="50000"
+               class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
+      </div>
+
+      <div>
+        <label class="block text-sm mb-1">رقم واتساب للتواصل</label>
+        <input id="whatsapp" type="text" placeholder="+213xxxxxxxxx"
+               class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
+      </div>
+
+      <!-- 🟢 حالة المنتج -->
+      <div>
+        <label class="block text-sm mb-1">حالة المنتج</label>
+        <select id="productCondition" class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
+          <option value="">اختر الحالة</option>
+          <option value="new">جديد</option>
+          <option value="used">مستعمل</option>
+        </select>
+      </div>
+
+      <!-- 🔴 مدة الاستخدام -->
+      <div id="usageDurationDiv" class="hidden">
+        <label class="block text-sm mb-1">مدة الاستخدام</label>
+        <select id="usageDuration" class="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
+          <option value="">اختر المدة</option>
+          <option>شهر</option>
+          <option>3 أشهر</option>
+          <option>6 أشهر</option>
+          <option>سنة</option>
+          <option>سنتين</option>
+        </select>
+      </div>
+
+      <!-- 📸 صور المنتج -->
+      <div>
+        <label class="block text-sm mb-1">صور المنتج (3 صور كحد أقصى)</label>
+        <input id="productImages" type="file" accept="image/*" multiple
+               class="w-full px-4 py-2 rounded-lg cursor-pointer">
+      </div>
+
+      <button type="submit"
+              class="w-full py-2 bg-yellow-400 text-black rounded-lg font-semibold hover:bg-yellow-300 transition">
+        إرسال المنتج للمراجعة
+      </button>
+
+    </form>
+  </div>
+
+  <footer class="mt-10 text-xs text-gray-400">
+    © 2025 Lizfar DZ — كل الحقوق محفوظة
+  </footer>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { auth, db } from "./firebase-config.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+    import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+
+    const productForm = document.getElementById("productForm");
+    const conditionSelect = document.getElementById("productCondition");
+    const usageDiv = document.getElementById("usageDurationDiv");
+
+    // ✅ إظهار / إخفاء مدة الاستخدام
+    conditionSelect.addEventListener("change", () => {
+      if (conditionSelect.value === "used") {
+        usageDiv.classList.remove("hidden");
+      } else {
+        usageDiv.classList.add("hidden");
+      }
+    });
+
+    // 🔒 السماح فقط للمسجلين بإضافة منتج
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        alert("⚠️ يجب تسجيل الدخول لإضافة منتج!");
+        window.location.href = "login.html";
+      }
+    });
+
+    // 🛒 إرسال المنتج للمراجعة
+    productForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("productName").value.trim();
+      const desc = document.getElementById("productDesc").value.trim();
+      const price = document.getElementById("productPrice").value.trim();
+      const whatsapp = document.getElementById("whatsapp").value.trim();
+      const condition = document.getElementById("productCondition").value;
+      const usageDuration = document.getElementById("usageDuration").value;
+
+      if (!name || !desc || !price || !whatsapp || !condition) {
+        alert("⚠️ يرجى ملء جميع الحقول المطلوبة!");
+        return;
+      }
+
+      // حفظ المنتج في Firestore
+      try {
+        await addDoc(collection(db, "pending_products"), {
+          name,
+          desc,
+          price: Number(price),
+          whatsapp,
+          condition,
+          usageDuration: condition === "used" ? usageDuration : null,
+          status: "pending", // 🕓 بانتظار المراجعة
+          createdAt: serverTimestamp()
+        });
+
+        alert("✅ تم إرسال المنتج للمراجعة من قبل الإدارة.");
+        productForm.reset();
+      } catch (error) {
+        alert("❌ حدث خطأ أثناء إرسال المنتج: " + error.message);
+      }
+    });
+  </script>
+</body>
+</html>

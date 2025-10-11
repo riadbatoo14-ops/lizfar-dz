@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>عروض اليوم | Lizfar DZ</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+    body {
+      font-family: "Cairo", sans-serif;
+      background-color: #0b1220;
+      background-image: linear-gradient(160deg, #0b1220, #111a2e);
+      color: white;
+      overflow-x: hidden;
+    }
+    .status-new {
+      color: #22c55e;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-right: 6px;
+    }
+    .status-used {
+      color: #ef4444;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-right: 6px;
+    }
+    .star {
+      color: #fbbf24;
+    }
+    /* 🔄 حركة السلايدر */
+    .carousel {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+    }
+    .carousel::-webkit-scrollbar { display: none; }
+    .carousel-item {
+      flex: 0 0 250px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    .carousel-item:hover { transform: scale(1.05); }
+  </style>
+</head>
+
+<body class="min-h-screen p-6">
+  <!-- Header -->
+  <header class="flex justify-between items-center mb-10">
+    <h1 class="text-3xl font-bold text-yellow-400">🛍️ متجر Lizfar DZ</h1>
+    <a href="index.html" class="text-gray-300 hover:text-yellow-400">🏠 الصفحة الرئيسية</a>
+  </header>
+
+  <!-- ⭐ منتجات مختارة -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-4">⭐ منتجات مختارة</h2>
+    <div id="featuredCarousel" class="carousel"></div>
+  </section>
+
+  <!-- 🔥 عروض اليوم -->
+  <section>
+    <h2 class="text-2xl font-semibold mb-6">🔥 عروض اليوم</h2>
+    <div id="offers" class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"></div>
+  </section>
+
+  <footer class="mt-10 text-xs text-gray-400 text-center">
+    © 2025 Lizfar DZ — كل الحقوق محفوظة
+  </footer>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { db } from "./firebase-config.js";
+    import { collection, getDocs } 
+      from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+
+    const offersSection = document.getElementById("offers");
+    const featuredCarousel = document.getElementById("featuredCarousel");
+
+    async function loadProducts() {
+      const snapshot = await getDocs(collection(db, "approved_products"));
+
+      offersSection.innerHTML = "";
+      featuredCarousel.innerHTML = "";
+
+      if (snapshot.empty) {
+        offersSection.innerHTML = "<p class='text-center text-gray-400 col-span-full'>لا توجد عروض حالياً.</p>";
+        return;
+      }
+
+      snapshot.forEach((docSnap, i) => {
+        const p = docSnap.data();
+
+        const statusText = p.condition === "new"
+          ? `<span class='status-new'>(جديد)</span>`
+          : `<span class='status-used'>(مستعمل - ${p.usageDuration})</span>`;
+
+        const ratingStars = "⭐".repeat(p.rating || 4);
+
+        // 🟡 بطاقة العرض
+        const card = `
+          <div class="bg-white/10 rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition transform">
+            <img src="${p.image1 || './assets/default-product.jpg'}" alt="${p.name}"
+                 class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h3 class="text-lg font-semibold mb-1 flex items-center">${p.name} ${statusText}</h3>
+              <p class="text-sm text-gray-300 mb-2 truncate">${p.desc}</p>
+              <div class="flex items-center justify-between">
+                <span class="text-yellow-400 font-bold">${p.price} دج</span>
+                <span class="text-sm">${ratingStars}</span>
+              </div>
+              <a href="https://wa.me/${p.whatsapp}" target="_blank"
+                 class="block mt-3 text-center bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg transition">
+                 💬 تواصل عبر واتساب
+              </a>
+            </div>
+          </div>`;
+
+        offersSection.insertAdjacentHTML("beforeend", card);
+
+        // أول 6 منتجات نضيفها في السلايدر
+        if (i < 6) {
+          featuredCarousel.insertAdjacentHTML("beforeend", `
+            <div class="carousel-item">
+              <img src="${p.image1 || './assets/default-product.jpg'}" class="w-full h-40 object-cover" alt="${p.name}">
+              <div class="p-3">
+                <h3 class="text-sm font-semibold mb-1">${p.name} ${statusText}</h3>
+                <p class="text-yellow-400 font-bold">${p.price} دج</p>
+              </div>
+            </div>
+          `);
+        }
+      });
+    }
+
+    // 🔁 حركة تلقائية للسلايدر
+    function autoScrollCarousel() {
+      const scrollAmount = 1;
+      setInterval(() => {
+        featuredCarousel.scrollLeft += scrollAmount;
+        if (featuredCarousel.scrollLeft >= featuredCarousel.scrollWidth - featuredCarousel.clientWidth) {
+          featuredCarousel.scrollLeft = 0;
+        }
+      }, 30);
+    }
+
+    await loadProducts();
+    autoScrollCarousel();
+  </script>
+</body>
+</html>
+
