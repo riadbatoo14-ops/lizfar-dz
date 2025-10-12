@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Lizfar Marketplace — نسخة محلية</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+    body { font-family: "Cairo", sans-serif; background: linear-gradient(180deg,#07101a,#071422); color: #fff; }
+    .pulse { animation: pulse 1.2s infinite; }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.08); opacity: .8; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .badge-new { background: rgba(16,185,129,0.12); color: #10b981; }
+    .badge-used { background: rgba(239,68,68,0.12); color: #ef4444; }
+    .hidden-xs { display:none; }
+    @media (min-width:640px){ .hidden-xs{display:block;} }
+    .card-bg { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); }
+  </style>
+</head>
+<body class="min-h-screen p-4">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <header class="flex items-center justify-between mb-6">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-lg bg-yellow-400 text-black flex items-center justify-center font-bold">LZ</div>
+        <div
