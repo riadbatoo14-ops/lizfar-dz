@@ -3,164 +3,147 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ليزفار DZ — الصفحة الرئيسية</title>
+  <title>الرئيسية | Lizfar DZ</title>
 
-  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
-    body { font-family: "Cairo", sans-serif; background-color: #0b1220; }
-    .bg-tech {
-      background-image:
-        radial-gradient(circle at 10% 10%, rgba(255,255,255,0.02), transparent 2%),
-        radial-gradient(circle at 90% 90%, rgba(255,255,255,0.01), transparent 2%),
-        linear-gradient(120deg, rgba(255,255,255,0.02), transparent 10%);
-      background-blend-mode: overlay;
+    body {
+      font-family: "Cairo", sans-serif;
+      background-color: #0b1220;
+      background-image: linear-gradient(160deg, #0b1220, #111a2e);
+      color: white;
+      overflow-x: hidden;
     }
-    .side-item:hover { background: rgba(255,255,255,0.03); }
-    .chev { transition: transform .25s ease; }
-    .chev.open { transform: rotate(-90deg); }
-    select option { color: black; }
+
+    .carousel {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+    }
+    .carousel::-webkit-scrollbar { display: none; }
+    .carousel-item {
+      flex: 0 0 250px;
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    .carousel-item:hover { transform: scale(1.05); }
+
+    .status-new { color: #22c55e; font-weight: 600; font-size: 0.9rem; margin-right: 6px; }
+    .status-used { color: #ef4444; font-weight: 600; font-size: 0.9rem; margin-right: 6px; }
   </style>
 </head>
 
-<body class="min-h-screen text-white bg-gradient-to-br from-gray-900 via-gray-800 to-black bg-tech">
-  <div class="min-h-screen flex">
+<body class="min-h-screen p-6">
 
-    <!-- Sidebar -->
-    <aside class="w-72 bg-gray-900/70 border-r border-white/5 p-4 hidden lg:block">
-      <div class="flex items-center gap-3 mb-6">
-        <div class="w-12 h-12 rounded-lg bg-yellow-400 flex items-center justify-center text-black font-bold">LZ</div>
-        <div>
-          <h1 class="text-lg font-semibold">ليزفار DZ</h1>
-          <p class="text-xs text-gray-400">سوق الأجهزة وقطع الحاسوب</p>
-        </div>
-      </div>
+  <!-- Header -->
+  <header class="flex justify-between items-center mb-10">
+    <div class="flex items-center">
+      <div class="w-12 h-12 bg-yellow-400 rounded-lg flex items-center justify-center text-black font-bold text-lg">LZ</div>
+      <h1 class="text-3xl font-bold text-yellow-400 mr-3">Lizfar DZ</h1>
+    </div>
+    <nav class="space-x-4">
+      <a href="index.html" class="text-gray-300 hover:text-yellow-400">🏠 الرئيسية</a>
+      <a href="offers.html" class="text-gray-300 hover:text-yellow-400">🔥 العروض</a>
+      <a href="add-product.html" class="text-gray-300 hover:text-yellow-400">➕ أضف منتج</a>
+      <a href="profile.html" class="text-gray-300 hover:text-yellow-400">👤 الملف الشخصي</a>
+    </nav>
+  </header>
 
-      <!-- Navigation -->
-      <nav class="space-y-2 overflow-auto" style="max-height:calc(100vh - 160px);">
-        <button data-filter="all" class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">أحدث المنتجات</button>
+  <!-- ⭐ منتجات مميزة -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-4">⭐ منتجات مميزة</h2>
+    <div id="featuredCarousel" class="carousel"></div>
+  </section>
 
-        <!-- PC -->
-        <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium pc-toggle">
-            <span>PC</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
-            </svg>
-          </button>
-          <div class="pc-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-            <button data-filter="pc-builds" class="w-full text-right px-3 py-2 rounded-md side-item">تجميعات</button>
-            <button data-filter="pc-gpu" class="w-full text-right px-3 py-2 rounded-md side-item">كروت شاشة</button>
-            <button data-filter="pc-cpu" class="w-full text-right px-3 py-2 rounded-md side-item">معالجات</button>
-            <button data-filter="pc-ram" class="w-full text-right px-3 py-2 rounded-md side-item">رامات</button>
-            <button data-filter="pc-mobo" class="w-full text-right px-3 py-2 rounded-md side-item">كروت أم</button>
-            <button data-filter="pc-cooler" class="w-full text-right px-3 py-2 rounded-md side-item">مراوح تبريد</button>
-            <button data-filter="pc-storage" class="w-full text-right px-3 py-2 rounded-md side-item">SSD / HDD</button>
-            <button data-filter="pc-psu" class="w-full text-right px-3 py-2 rounded-md side-item">وحدة الطاقة</button>
+  <!-- 🔥 أحدث المنتجات -->
+  <section>
+    <h2 class="text-2xl font-semibold mb-6">🔥 أحدث المنتجات</h2>
+    <div id="latestProducts" class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"></div>
+  </section>
+
+  <footer class="mt-10 text-xs text-gray-400 text-center">
+    © 2025 Lizfar DZ — كل الحقوق محفوظة
+  </footer>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { db } from "./firebase-config.js";
+    import { collection, getDocs, query, orderBy, limit } 
+      from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+
+    const featuredCarousel = document.getElementById("featuredCarousel");
+    const latestProducts = document.getElementById("latestProducts");
+
+    async function loadProducts() {
+      const snapshot = await getDocs(collection(db, "approved_products"));
+
+      featuredCarousel.innerHTML = "";
+      latestProducts.innerHTML = "";
+
+      if (snapshot.empty) {
+        latestProducts.innerHTML = "<p class='text-center text-gray-400 col-span-full'>لا توجد منتجات حالياً.</p>";
+        return;
+      }
+
+      snapshot.forEach((docSnap, i) => {
+        const p = docSnap.data();
+        const statusText = p.condition === "new"
+          ? `<span class='status-new'>(جديد)</span>`
+          : `<span class='status-used'>(مستعمل - ${p.usageDuration})</span>`;
+        const ratingStars = "⭐".repeat(p.rating || 4);
+        const image = p.images?.[0] || p.image1 || './assets/default-product.jpg';
+
+        // 🟡 بطاقة أحدث المنتجات
+        const card = `
+          <div class="bg-white/10 rounded-2xl overflow-hidden shadow-lg p-4 hover:scale-105 transition transform">
+            <img src="${image}" alt="${p.name}" class="w-full h-48 object-cover rounded-lg mb-3">
+            <h3 class="text-lg font-semibold mb-1 flex items-center">${p.name} ${statusText}</h3>
+            <p class="text-sm text-gray-300 mb-2 truncate">${p.desc}</p>
+            <div class="flex items-center justify-between">
+              <span class="text-yellow-400 font-bold">${p.price} دج</span>
+              <span class="text-sm">${ratingStars}</span>
+            </div>
+            <a href="https://wa.me/${p.whatsapp}" target="_blank"
+               class="block mt-3 text-center bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg transition">
+               💬 تواصل عبر واتساب
+            </a>
           </div>
-        </div>
+        `;
+        latestProducts.insertAdjacentHTML("beforeend", card);
 
-        <!-- Laptop -->
-        <button data-filter="laptop" class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">Laptop</button>
-
-        <!-- Phones -->
-        <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium phone-toggle">
-            <span>هواتف</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
-            </svg>
-          </button>
-          <div class="phone-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-            <button data-filter="phone-samsung" class="w-full text-right px-3 py-2 rounded-md side-item">Samsung</button>
-            <button data-filter="phone-xiaomi" class="w-full text-right px-3 py-2 rounded-md side-item">Xiaomi</button>
-            <button data-filter="phone-huawei" class="w-full text-right px-3 py-2 rounded-md side-item">Huawei</button>
-            <button data-filter="phone-oppo" class="w-full text-right px-3 py-2 rounded-md side-item">Oppo</button>
-            <button data-filter="phone-infinix" class="w-full text-right px-3 py-2 rounded-md side-item">Infinix</button>
-            <button data-filter="phone-iphone" class="w-full text-right px-3 py-2 rounded-md side-item">iPhone</button>
-          </div>
-        </div>
-
-        <!-- Accessories -->
-        <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium acc-toggle">
-            <span>إكسسوارات</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
-            </svg>
-          </button>
-          <div class="acc-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-            <button data-filter="acc-mouse" class="w-full text-right px-3 py-2 rounded-md side-item">فأرة</button>
-            <button data-filter="acc-keyboard" class="w-full text-right px-3 py-2 rounded-md side-item">لوحة مفاتيح</button>
-            <button data-filter="acc-headset" class="w-full text-right px-3 py-2 rounded-md side-item">سماعات</button>
-            <button data-filter="acc-pc" class="w-full text-right px-3 py-2 rounded-md side-item">إكسسوارات الحاسوب</button>
-            <button data-filter="acc-phone" class="w-full text-right px-3 py-2 rounded-md side-item">إكسسوارات الهاتف</button>
-          </div>
-        </div>
-
-        <!-- Screens -->
-        <button data-filter="screens" class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">شاشات</button>
-      </nav>
-    </aside>
-
-    <!-- Main -->
-    <main class="flex-1 p-6 lg:pl-8">
-      <!-- Header -->
-      <header class="flex items-center justify-between mb-8">
-        <h1 class="text-xl font-semibold">مرحبا بك في Lizfar DZ</h1>
-        <div class="flex items-center gap-3">
-          <a href="signup.html" class="px-4 py-2 rounded-full bg-yellow-400 text-black font-semibold">إنشاء حساب</a>
-          <a href="login.html" class="px-4 py-2 rounded-full bg-white/6">تسجيل الدخول</a>
-        </div>
-      </header>
-
-      <section>
-        <h2 class="text-2xl font-semibold mb-4">منتجات مختارة</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-white/10 rounded-xl p-4">
-            <div class="h-48 bg-black/30 rounded-md flex items-center justify-center">صورة المنتج</div>
-            <h3 class="mt-3 text-lg font-bold">حاسوب ألعاب متكامل</h3>
-            <p class="text-gray-400">معالج Ryzen + بطاقة RTX</p>
-            <span class="text-yellow-400 font-semibold mt-2 inline-block">120,000 دج</span>
-          </div>
-
-          <div class="bg-white/10 rounded-xl p-4">
-            <div class="h-48 bg-black/30 rounded-md flex items-center justify-center">صورة المنتج</div>
-            <h3 class="mt-3 text-lg font-bold">هاتف Samsung A55</h3>
-            <p class="text-gray-400">كاميرا 64MP - شاشة Super AMOLED</p>
-            <span class="text-yellow-400 font-semibold mt-2 inline-block">65,000 دج</span>
-          </div>
-
-          <div class="bg-white/10 rounded-xl p-4">
-            <div class="h-48 bg-black/30 rounded-md flex items-center justify-center">صورة المنتج</div>
-            <h3 class="mt-3 text-lg font-bold">شاشة 27 بوصة</h3>
-            <p class="text-gray-400">دقة 2K - معدل تحديث 144Hz</p>
-            <span class="text-yellow-400 font-semibold mt-2 inline-block">48,000 دج</span>
-          </div>
-        </div>
-      </section>
-
-      <footer class="text-xs text-gray-400 mt-12">
-        © 2025 Lizfar DZ — كل الحقوق محفوظة
-      </footer>
-    </main>
-  </div>
-
-  <script>
-    // تفعيل القوائم الفرعية
-    const toggle = (btnClass, subClass) => {
-      const btn = document.querySelector(btnClass);
-      const sub = document.querySelector(subClass);
-      const chev = btn.querySelector('.chev');
-      btn.addEventListener('click', () => {
-        sub.classList.toggle('hidden');
-        chev.classList.toggle('open');
+        // أول 6 منتجات نضيفها للـ Featured Carousel
+        if (i < 6) {
+          featuredCarousel.insertAdjacentHTML("beforeend", `
+            <div class="carousel-item">
+              <img src="${image}" class="w-full h-40 object-cover" alt="${p.name}">
+              <div class="p-3">
+                <h3 class="text-sm font-semibold mb-1">${p.name} ${statusText}</h3>
+                <p class="text-yellow-400 font-bold">${p.price} دج</p>
+              </div>
+            </div>
+          `);
+        }
       });
-    };
-    toggle('.pc-toggle', '.pc-submenu');
-    toggle('.phone-toggle', '.phone-submenu');
-    toggle('.acc-toggle', '.acc-submenu');
+    }
+
+    // 🔁 حركة تلقائية للسلايدر
+    function autoScrollCarousel() {
+      const scrollAmount = 1;
+      setInterval(() => {
+        featuredCarousel.scrollLeft += scrollAmount;
+        if (featuredCarousel.scrollLeft >= featuredCarousel.scrollWidth - featuredCarousel.clientWidth) {
+          featuredCarousel.scrollLeft = 0;
+        }
+      }, 30);
+    }
+
+    await loadProducts();
+    autoScrollCarousel();
   </script>
 </body>
 </html>
