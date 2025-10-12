@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ليزفار DZ — الصفحة الرئيسية</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+    body { font-family: "Cairo", sans-serif; background-color: #0b1220; }
+    .bg-tech {
+      background-image:
+        radial-gradient(circle at 10% 10%, rgba(255,255,255,0.02), transparent 2%),
+        radial-gradient(circle at 90% 90%, rgba(255,255,255,0.01), transparent 2%),
+        linear-gradient(120deg, rgba(255,255,255,0.02), transparent 10%);
+      background-blend-mode: overlay;
+    }
+    .side-item:hover { background: rgba(255,255,255,0.03); }
+    .chev { transition: transform .25s ease; }
+    .chev.open { transform: rotate(-90deg); }
+    select option { color: black; }
+  </style>
+</head>
+
+<body class="min-h-screen text-white bg-gradient-to-br from-gray-900 via-gray-800 to-black bg-tech">
+  <div class="min-h-screen flex">
+
+    <!-- Sidebar -->
+    <aside class="w-72 bg-gray-900/70 border-r border-white/5 p-4 hidden lg:block">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-lg bg-yellow-400 flex items-center justify-center text-black font-bold">LZ</div>
+        <div>
+          <h1 class="text-lg font-semibold">ليزفار DZ</h1>
+          <p class="text-xs text-gray-400">سوق الأجهزة وقطع الحاسوب</p>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="space-y-2 overflow-auto" style="max-height:calc(100vh - 160px);">
+        <button data-filter="all" class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">أحدث المنتجات</button>
+
+        <!-- PC -->
+        <div>
+          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium pc-toggle">
+            <span>PC</span>
+            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+          <div class="pc-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
+            <button data-filter="pc-builds" class="w-full text-right px-3 py-2 rounded-md side-item">تجميعات</button>
+            <button data-filter="pc-gpu" class="w-full text-right px-3 py-2 rounded-md side-item">كروت شاشة</button>
+            <button data-filter="pc-cpu" class="w-full text-right px-3 py-2 rounded-md side-item">معالجات</button>
+            <button data-filter="pc-ram" class="w-full text-right px-3 py-2 rounded-md side-item">رامات</button>
+            <button data-filter="pc-mobo" class="w-full text-right px-3 py-2 rounded-md side-item">كروت أم</button>
+            <button data-filter="pc-cooler" class="w-full text-right px-3 py-2 rounded-md side-item">مراوح تبريد</button>
+            <button data-filter="pc-storage" class="w-full text-right px-3 py-2 rounded-md side-item">SSD / HDD</button>
+            <button data-filter="pc-psu" class="w-full text-right px-3 py-2 rounded-md side-item">وحدة الطاقة</button>
+          </div>
+        </div>
+
+        <!-- Laptop -->
+        <button data-filter="laptop" class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">Laptop</button>
+
+        <!-- Phones -->
+        <div>
+          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium phone-toggle">
+            <span>هواتف</span>
+            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+          <div class="phone-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
+            <button data-filter="phone-samsung" class="w-full text-right px-3 py-2 rounded-md side-item">Samsung</button>
+            <button data-filter="phone-xiaomi" class="w-full text-right px-3 py-2 rounded-md side-item">Xiaomi</button>
+            <button data-filter="phone-huawei" class="w-full text-right px-3 py-2 rounded-md side-item">Huawei</button>
+            <button data-filter="phone-oppo" class="w-full text-right px-3 py-2 rounded-md side-item">Oppo</button>
+            <button data-filter="phone-infinix" class="w-full text-right px-3 py-2 rounded-md side-item">Infinix</button>
+            <button data-filter="phone-iphone" class="w-full text-right px-3 py-2 rounded-md side-item">iPhone</button>
+          </div>
+        </div>
+
+        <!-- Accessories -->
+        <div>
+          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium acc-toggle">
+            <span>إكسسوارات</span>
+            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+          <div class="acc-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
+            <button data-filter="acc-mouse" class="w-full text-right px-3 py-2 rounded-md side-item">فأرة</button>
+            <button data-filter="acc-keyboard" class="w-full text-right px-3 py-2 rounded-md side-item">لوحة مفاتيح</button>
+            <button data-filter="acc-headset" class="w-full text-right px-3 py-2 rounded-md side-item">سماعات</button>
+            <button data-filter="acc-pc" class="w-full text-right px-3 py-2 rounded-md side-item">إكسسوارات الحاسوب</button>
+            <button data-filter="acc-phone" class="w-full text-right px-3 py-2 rounded-md side-item">إكسسوارات الهاتف</button>
+          </div>
+        </div>
+
+        <!-- Screens -->
+        <button data-filter="screens" class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">شاشات</button>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1 p-6 lg:pl-8">
+      <!-- Header -->
+      <header class="flex items-center justify-between mb-8">
+        <h1 class="text-xl font-semibold">مرحبا بك في Lizfar DZ</h1>
+        <div class="flex items-center gap-3">
+          <a href="signup.html" class="px-4 py-2 rounded-full bg-yellow-400 text-black font-semibold">إنشاء حساب</a>
+          <a href="login.html" class="px-4 py-2 rounded-full bg-white/6">تسجيل الدخول</a>
+        </div>
+      </header>
+
+      <section>
+        <h2 class="text-2xl font-semibold mb-4">منتجات مختارة</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="h-48 bg-black/30 rounded-md flex items-center justify-center">صورة المنتج</div>
+            <h3 class="mt-3 text-lg font-bold">حاسوب ألعاب متكامل</h3>
+            <p class="text-gray-400">معالج Ryzen + بطاقة RTX</p>
+            <span class="text-yellow-400 font-semibold mt-2 inline-block">120,000 دج</span>
+          </div>
+
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="h-48 bg-black/30 rounded-md flex items-center justify-center">صورة المنتج</div>
+            <h3 class="mt-3 text-lg font-bold">هاتف Samsung A55</h3>
+            <p class="text-gray-400">كاميرا 64MP - شاشة Super AMOLED</p>
+            <span class="text-yellow-400 font-semibold mt-2 inline-block">65,000 دج</span>
+          </div>
+
+          <div class="bg-white/10 rounded-xl p-4">
+            <div class="h-48 bg-black/30 rounded-md flex items-center justify-center">صورة المنتج</div>
+            <h3 class="mt-3 text-lg font-bold">شاشة 27 بوصة</h3>
+            <p class="text-gray-400">دقة 2K - معدل تحديث 144Hz</p>
+            <span class="text-yellow-400 font-semibold mt-2 inline-block">48,000 دج</span>
+          </div>
+        </div>
+      </section>
+
+      <footer class="text-xs text-gray-400 mt-12">
+        © 2025 Lizfar DZ — كل الحقوق محفوظة
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // تفعيل القوائم الفرعية
+    const toggle = (btnClass, subClass) => {
+      const btn = document.querySelector(btnClass);
+      const sub = document.querySelector(subClass);
+      const chev = btn.querySelector('.chev');
+      btn.addEventListener('click', () => {
+        sub.classList.toggle('hidden');
+        chev.classList.toggle('open');
+      });
+    };
+    toggle('.pc-toggle', '.pc-submenu');
+    toggle('.phone-toggle', '.phone-submenu');
+    toggle('.acc-toggle', '.acc-submenu');
+  </script>
+</body>
+</html>
