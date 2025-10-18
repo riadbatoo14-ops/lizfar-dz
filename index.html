@@ -21,6 +21,7 @@
     .chev { transition: transform .25s ease; }
     .chev.open { transform: rotate(-90deg); }
     select option { color: black; }
+    .submenu { transition: max-height 0.3s ease; overflow: hidden; }
   </style>
 </head>
 
@@ -38,116 +39,124 @@
       </div>
 
       <!-- Navigation -->
-  <nav class="space-y-2 overflow-auto" style="max-height:calc(100vh - 160px);">
-    <button data-filter="all" class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">
-      أحدث المنتجات
-    </button>
+      <nav class="space-y-2 overflow-auto" style="max-height:calc(100vh - 160px);">
+        <button data-filter="all" class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">
+          أحدث المنتجات
+        </button>
 
-    <!-- PC -->
-    <div>
-      <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium pc-toggle">
-        <span class="flex items-center gap-2"><span></span> PC</span>
-        <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <div class="pc-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">تجميعات</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">كروت شاشة</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">معالجات</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">رامات</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">كروت أم</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">مراوح تبريد</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">SSD / HDD</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">وحدة الطاقة</button>
-      </div>
-    </div>
+        <!-- PC -->
+        <div>
+          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium pc-toggle">
+            <span class="flex items-center gap-2">🖥️ PC</span>
+            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+          <div class="pc-submenu submenu mt-2 mr-2 ml-2 max-h-0 space-y-1 text-sm">
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">تجميعات جاهزة</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">كروت شاشة</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">معالجات</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">رامات</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">لوحات أم</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">تبريد</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">SSD / HDD</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">مزود طاقة</button>
+          </div>
+        </div>
 
-    <!-- Laptop -->
-    <div>
-      <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium laptop-toggle">
-        <span class="flex items-center gap-2"><span></span> Laptop</span>
-        <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <div class="laptop-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">HP</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">Dell</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">Lenovo</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">Asus</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">MSI</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">Apple</button>
-      </div>
-    </div>
+        <!-- Laptop -->
+        <div>
+          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium laptop-toggle">
+            <span class="flex items-center gap-2">💻 Laptop</span>
+            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+          <div class="laptop-submenu submenu mt-2 mr-2 ml-2 max-h-0 space-y-1 text-sm">
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">HP</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">Dell</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">Lenovo</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">Asus</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">MSI</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">Apple</button>
+          </div>
+        </div>
 
-    <!-- Phones -->
-    <div>
-      <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium phone-toggle">
-        <span class="flex items-center gap-2"><span></span> هواتف</span>
-        <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <div class="phone-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">Samsung</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">Xiaomi</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">Huawei</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">Oppo</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">Infinix</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">iPhone</button>
-      </div>
-    </div>
+        <!-- Phones -->
+        <div>
+          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium phone-toggle">
+            <span class="flex items-center gap-2">📱 هواتف</span>
+            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+          <div class="phone-submenu submenu mt-2 mr-2 ml-2 max-h-0 space-y-1 text-sm">
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">iPhone</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">Samsung</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">Xiaomi</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">Oppo</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">Infinix</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">Realme</button>
+          </div>
+        </div>
 
-    <!-- Consoles -->
-    <div>
-      <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium console-toggle">
-        <span class="flex items-center gap-2"><span></span> Consoles</span>
-        <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <div class="console-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">PlayStation</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">Xbox</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">Nintendo</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">Handhelds</button>
-      </div>
-    </div>
+        <!-- Consoles -->
+        <div>
+          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium console-toggle">
+            <span class="flex items-center gap-2">🎮 Consoles</span>
+            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+          <div class="console-submenu submenu mt-2 mr-2 ml-2 max-h-0 space-y-1 text-sm">
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">PlayStation</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">Xbox</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">Nintendo</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">Handheld</button>
+          </div>
+        </div>
 
-    <!-- Accessories -->
-    <div>
-      <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium acc-toggle">
-        <span class="flex items-center gap-2"><span></span> إكسسوارات</span>
-        <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <div class="acc-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">فأرة</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">لوحة مفاتيح</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">سماعات</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">إكسسوارات الحاسوب</button>
-        <button class="w-full text-right px-3 py-2 rounded-md side-item">إكسسوارات الهاتف</button>
-      </div>
-    </div>
+        <!-- Accessories -->
+        <div>
+          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium acc-toggle">
+            <span class="flex items-center gap-2">🎧 إكسسوارات</span>
+            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+          <div class="acc-submenu submenu mt-2 mr-2 ml-2 max-h-0 space-y-1 text-sm">
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">سماعات</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">لوحات مفاتيح</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">فأرات</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">مايكروفونات</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">كراسي وستاندات</button>
+          </div>
+        </div>
 
-    <!-- Screens -->
-    <button data-filter="screens" class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">
-       شاشات
-    </button>
-  </nav>
-</aside>
+        <!-- Screens -->
+        <div>
+          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium screen-toggle">
+            <span class="flex items-center gap-2">🖼️ شاشات</span>
+            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+          <div class="screen-submenu submenu mt-2 mr-2 ml-2 max-h-0 space-y-1 text-sm">
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">شاشات ألعاب</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">شاشات احترافية</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">4K / QHD</button>
+            <button class="side-item w-full text-right px-3 py-2 rounded-md">منحنية Curved</button>
+          </div>
+        </div>
 
-      </div>
+      </nav>
+    </aside>
 
     <!-- Main -->
     <main class="flex-1 p-6 lg:pl-8">
       <!-- Header -->
       <header class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
         <div class="flex items-center gap-3">
-          <!-- User menu -->
-          <div class="relative hidden" id="userMenu">
-            <button id="userBtn" class="flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 hover:bg-white/20 transition">
-              <img src="./assets/default-avatar.png" alt="User" class="w-8 h-8 rounded-full object-cover" id="userAvatar">
-              <span id="userNameHeader" class="text-sm font-medium"></span>
-            </button>
-            <div class="absolute left-0 mt-2 w-40 bg-gray-900/90 rounded-lg shadow-lg hidden" id="userDropdown">
-              <a href="profile.html" class="block px-4 py-2 hover:bg-gray-800">الملف الشخصي</a>
-              <button id="logoutBtn" class="w-full text-left px-4 py-2 hover:bg-gray-800">تسجيل الخروج</button>
-            </div>
-          </div>
-
           <!-- Auth Buttons -->
           <div id="authBtns" class="flex gap-3">
             <a href="signup.html" class="px-4 py-2 rounded-full bg-yellow-400 text-black font-semibold">إنشاء حساب</a>
@@ -183,69 +192,28 @@
     </main>
   </div>
 
-  <!-- Firebase Auth Integration -->
-  <script type="module">
-    import { auth, db } from "./firebase-config.js";
-    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
-    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
-
-    const userMenu = document.getElementById("userMenu");
-    const authBtns = document.getElementById("authBtns");
-    const userNameHeader = document.getElementById("userNameHeader");
-    const userBtn = document.getElementById("userBtn");
-    const dropdown = document.getElementById("userDropdown");
-    const logoutBtn = document.getElementById("logoutBtn");
-
-    // Toggle dropdown
-    userBtn?.addEventListener("click", () => dropdown.classList.toggle("hidden"));
-
-    // حالة المستخدم
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        // إخفاء أزرار الدخول
-        authBtns.classList.add("hidden");
-        userMenu.classList.remove("hidden");
-
-        try {
-          const docRef = doc(db, "users", user.uid);
-          const snap = await getDoc(docRef);
-          if (snap.exists()) {
-            const data = snap.data();
-            userNameHeader.textContent = data.name || "مستخدم";
-          } else {
-            userNameHeader.textContent = user.email.split("@")[0];
-          }
-        } catch {
-          userNameHeader.textContent = "مستخدم";
-        }
-      } else {
-        userMenu.classList.add("hidden");
-        authBtns.classList.remove("hidden");
-      }
-    });
-
-    // تسجيل الخروج
-    logoutBtn?.addEventListener("click", async () => {
-      await signOut(auth);
-      window.location.reload();
-    });
-  </script>
-
+  <!-- Sidebar Toggle Script -->
   <script>
-    // Dropdown toggles for sidebar
     const toggles = [
       {btn: '.pc-toggle', menu: '.pc-submenu'},
       {btn: '.laptop-toggle', menu: '.laptop-submenu'},
       {btn: '.phone-toggle', menu: '.phone-submenu'},
       {btn: '.console-toggle', menu: '.console-submenu'},
       {btn: '.acc-toggle', menu: '.acc-submenu'},
+      {btn: '.screen-toggle', menu: '.screen-submenu'},
     ];
+
     toggles.forEach(t => {
       const btn = document.querySelector(t.btn);
       const menu = document.querySelector(t.menu);
       const icon = btn.querySelector('.chev');
+
       btn.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
+        if(menu.style.maxHeight && menu.style.maxHeight !== '0px'){
+          menu.style.maxHeight = '0px';
+        } else {
+          menu.style.maxHeight = menu.scrollHeight + "px";
+        }
         icon.classList.toggle('open');
       });
     });
