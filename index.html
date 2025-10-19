@@ -125,8 +125,8 @@
     <!-- Main -->
     <main class="flex-1 p-6 lg:pl-8">
       <!-- Header -->
-      <header class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
-        <div class="flex items-center gap-3">
+      <header class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4 relative">
+        <div class="flex items-center gap-3 relative">
           <div id="authBtns" class="flex gap-3">
             <a href="signup.html" class="px-4 py-2 rounded-full bg-yellow-400 text-black font-semibold">إنشاء حساب</a>
             <a href="login.html" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition">تسجيل الدخول</a>
@@ -158,13 +158,12 @@
     </main>
   </div>
 
-  <!-- ✅ Sidebar Toggle Fixed -->
+  <!-- ✅ Sidebar Toggle -->
   <script>
     document.querySelectorAll(".toggle-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         const target = document.getElementById(btn.dataset.target);
         const icon = btn.querySelector(".chev");
-
         const isOpen = target.style.maxHeight && target.style.maxHeight !== "0px";
         target.style.maxHeight = isOpen ? "0px" : target.scrollHeight + "px";
         icon.classList.toggle("open", !isOpen);
@@ -180,10 +179,14 @@
 
     const authBtns = document.getElementById("authBtns");
     const userBox = document.createElement("div");
-    userBox.className = "hidden items-center gap-3 cursor-pointer";
+    userBox.className = "hidden items-center gap-3 cursor-pointer relative";
     userBox.innerHTML = `
-      <img id="userPhoto" class="w-10 h-10 rounded-full border-2 border-yellow-400 object-cover">
       <span id="userName" class="font-semibold text-yellow-400"></span>
+      <img id="userPhoto" class="w-10 h-10 rounded-full border-2 border-yellow-400 object-cover">
+      <div id="dropdownMenu" class="hidden absolute top-12 right-0 bg-gray-800 border border-white/10 rounded-lg shadow-lg w-40 py-2 text-sm">
+        <button id="profileBtn" class="block w-full text-right px-4 py-2 hover:bg-white/10">👤 الملف الشخصي</button>
+        <button id="logoutBtn" class="block w-full text-right px-4 py-2 hover:bg-white/10 text-red-400">🚪 تسجيل الخروج</button>
+      </div>
     `;
     authBtns.parentElement.appendChild(userBox);
 
@@ -193,13 +196,33 @@
         userBox.classList.remove("hidden");
         document.getElementById("userName").textContent = user.displayName || "مستخدم";
         document.getElementById("userPhoto").src = user.photoURL || "https://cdn-icons-png.flaticon.com/512/149/149071.png";
-        userBox.addEventListener("click", async () => {
+        
+        const dropdown = document.getElementById("dropdownMenu");
+        const photo = document.getElementById("userPhoto");
+
+        photo.addEventListener("click", () => {
+          dropdown.classList.toggle("hidden");
+        });
+
+        document.getElementById("logoutBtn").addEventListener("click", async () => {
           await signOut(auth);
           location.reload();
+        });
+
+        document.getElementById("profileBtn").addEventListener("click", () => {
+          window.location.href = "profile.html";
         });
       } else {
         authBtns.classList.remove("hidden");
         userBox.classList.add("hidden");
+      }
+    });
+
+    // لإغلاق القائمة عند الضغط خارجها
+    document.addEventListener("click", (e) => {
+      const dropdown = document.getElementById("dropdownMenu");
+      if (dropdown && !dropdown.contains(e.target) && !e.target.closest("#userPhoto")) {
+        dropdown.classList.add("hidden");
       }
     });
   </script>
