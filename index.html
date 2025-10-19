@@ -226,5 +226,33 @@
       }
     });
   </script>
+  <!-- ✅ تحميل قسم العروض من store.html -->
+<script>
+  // تحميل منتجات من store.html تلقائيًا
+  fetch("store.html")
+    .then(res => res.text())
+    .then(html => {
+      // إنشاء عنصر مؤقت لقراءة محتوى الصفحة
+      const temp = document.createElement("div");
+      temp.innerHTML = html;
+
+      // العثور على قسم المنتجات
+      const products = temp.querySelector("#store-products");
+      if (products) {
+        // إنشاء قسم جديد في index.html لإضافة المنتجات تحته
+        const targetSection = document.createElement("section");
+        targetSection.className = "mt-12";
+        targetSection.innerHTML = `
+          <h2 class="text-2xl font-semibold mb-4">🛒 منتجات المتجر</h2>
+          ${products.outerHTML}
+        `;
+        // إدراج القسم بعد قسم العروض الحالي
+        const offersSection = document.getElementById("offersSection");
+        if (offersSection) offersSection.after(targetSection);
+      }
+    })
+    .catch(err => console.error("حدث خطأ أثناء تحميل المتجر:", err));
+</script>
 </body>
 </html>
+
