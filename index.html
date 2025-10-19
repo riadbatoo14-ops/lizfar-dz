@@ -196,7 +196,13 @@
         userBox.classList.remove("hidden");
         document.getElementById("userName").textContent = user.displayName || "مستخدم";
         document.getElementById("userPhoto").src = user.photoURL || "https://cdn-icons-png.flaticon.com/512/149/149071.png";
-        
+        document.getElementById("addProductBtn").classList.remove("hidden");
+      <a id="addProductBtn"
+   href="add-product.html"
+   class="hidden bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-4 py-2 rounded-lg transition ml-3">
+   📦 عرض منتجك
+ </a>
+
         const dropdown = document.getElementById("dropdownMenu");
         const photo = document.getElementById("userPhoto");
 
@@ -212,11 +218,12 @@
         document.getElementById("profileBtn").addEventListener("click", () => {
           window.location.href = "profile.html";
         });
-      } else {
-        authBtns.classList.remove("hidden");
-        userBox.classList.add("hidden");
-      }
-    });
+       else {
+    authBtns.classList.remove("hidden");
+    userBox.classList.add("hidden");
+    document.getElementById("addProductBtn").classList.add("hidden"); // 🔒 إخفاء الزر عند عدم تسجيل الدخول
+  }
+});
 
     // لإغلاق القائمة عند الضغط خارجها
     document.addEventListener("click", (e) => {
@@ -255,4 +262,5 @@
 </script>
 </body>
 </html>
+
 
