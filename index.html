@@ -171,68 +171,80 @@
     });
   </script>
 
-  <!-- ✅ Firebase Auth -->
-  <script type="module">
-    import { auth } from "./firebase-config.js";
-    import { onAuthStateChanged, signOut } 
-      from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+<!-- ✅ Firebase Auth -->
+<script type="module">
+  import { auth } from "./firebase-config.js";
+  import { onAuthStateChanged, signOut } 
+    from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
-    const authBtns = document.getElementById("authBtns");
-    const userBox = document.createElement("div");
-    userBox.className = "hidden items-center gap-3 cursor-pointer relative";
-    userBox.innerHTML = `
-      <span id="userName" class="font-semibold text-yellow-400"></span>
-      <img id="userPhoto" class="w-10 h-10 rounded-full border-2 border-yellow-400 object-cover">
-      <div id="dropdownMenu" class="hidden absolute top-12 right-0 bg-gray-800 border border-white/10 rounded-lg shadow-lg w-40 py-2 text-sm">
-        <button id="profileBtn" class="block w-full text-right px-4 py-2 hover:bg-white/10">👤 الملف الشخصي</button>
-        <button id="logoutBtn" class="block w-full text-right px-4 py-2 hover:bg-white/10 text-red-400">🚪 تسجيل الخروج</button>
-      </div>
-    `;
-    authBtns.parentElement.appendChild(userBox);
+  const authBtns = document.getElementById("authBtns");
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        authBtns.classList.add("hidden");
-        userBox.classList.remove("hidden");
-        document.getElementById("userName").textContent = user.displayName || "مستخدم";
-        document.getElementById("userPhoto").src = user.photoURL || "https://cdn-icons-png.flaticon.com/512/149/149071.png";
-        document.getElementById("addProductBtn").classList.remove("hidden");
-      <a id="addProductBtn"
-   href="add-product.html"
-   class="hidden bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-4 py-2 rounded-lg transition ml-3">
-   📦 عرض منتجك
- </a>
+  // 🔹 إنشاء صندوق المستخدم
+  const userBox = document.createElement("div");
+  userBox.className = "hidden items-center gap-3 cursor-pointer relative";
+  userBox.innerHTML = `
+    <button id="addProductBtn" class="hidden px-4 py-2 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-300 transition">
+      📦 عرض منتجك
+    </button>
+    <span id="userName" class="font-semibold text-yellow-400"></span>
+    <img id="userPhoto" class="w-10 h-10 rounded-full border-2 border-yellow-400 object-cover">
+    <div id="dropdownMenu" class="hidden absolute top-12 right-0 bg-gray-800 border border-white/10 rounded-lg shadow-lg w-40 py-2 text-sm">
+      <button id="profileBtn" class="block w-full text-right px-4 py-2 hover:bg-white/10">👤 الملف الشخصي</button>
+      <button id="logoutBtn" class="block w-full text-right px-4 py-2 hover:bg-white/10 text-red-400">🚪 تسجيل الخروج</button>
+    </div>
+  `;
+  authBtns.parentElement.appendChild(userBox);
 
-        const dropdown = document.getElementById("dropdownMenu");
-        const photo = document.getElementById("userPhoto");
+  // 🔥 حالة تسجيل الدخول / الخروج
+  onAuthStateChanged(auth, (user) => {
+    const addProductBtn = document.getElementById("addProductBtn");
 
-        photo.addEventListener("click", () => {
-          dropdown.classList.toggle("hidden");
-        });
+    if (user) {
+      authBtns.classList.add("hidden");
+      userBox.classList.remove("hidden");
+      addProductBtn.classList.remove("hidden");
 
-        document.getElementById("logoutBtn").addEventListener("click", async () => {
-          await signOut(auth);
-          location.reload();
-        });
+      document.getElementById("userName").textContent = user.displayName || "مستخدم";
+      document.getElementById("userPhoto").src = user.photoURL || "https://cdn-icons-png.flaticon.com/512/149/149071.png";
 
-        document.getElementById("profileBtn").addEventListener("click", () => {
-          window.location.href = "profile.html";
-        });
-       else {
-    authBtns.classList.remove("hidden");
-    userBox.classList.add("hidden");
-    document.getElementById("addProductBtn").classList.add("hidden"); // 🔒 إخفاء الزر عند عدم تسجيل الدخول
-  }
-});
-
-    // لإغلاق القائمة عند الضغط خارجها
-    document.addEventListener("click", (e) => {
       const dropdown = document.getElementById("dropdownMenu");
-      if (dropdown && !dropdown.contains(e.target) && !e.target.closest("#userPhoto")) {
-        dropdown.classList.add("hidden");
-      }
-    });
-  </script>
+      const photo = document.getElementById("userPhoto");
+
+      photo.addEventListener("click", () => {
+        dropdown.classList.toggle("hidden");
+      });
+
+      document.getElementById("logoutBtn").addEventListener("click", async () => {
+        await signOut(auth);
+        location.reload();
+      });
+
+      document.getElementById("profileBtn").addEventListener("click", () => {
+        window.location.href = "profile.html";
+      });
+
+      // 📦 زر عرض المنتج
+      addProductBtn.addEventListener("click", () => {
+        window.location.href = "add-product.html";
+      });
+
+    } else {
+      // عند تسجيل الخروج
+      authBtns.classList.remove("hidden");
+      userBox.classList.add("hidden");
+      addProductBtn.classList.add("hidden");
+    }
+  });
+
+  // لإغلاق القائمة عند الضغط خارجها
+  document.addEventListener("click", (e) => {
+    const dropdown = document.getElementById("dropdownMenu");
+    if (dropdown && !dropdown.contains(e.target) && !e.target.closest("#userPhoto")) {
+      dropdown.classList.add("hidden");
+    }
+  });
+</script>
+  
   <!-- ✅ تحميل قسم العروض من store.html -->
 <script>
   // تحميل منتجات من store.html تلقائيًا
@@ -262,5 +274,3 @@
 </script>
 </body>
 </html>
-
-
