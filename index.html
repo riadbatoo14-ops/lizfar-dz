@@ -40,115 +40,8 @@
 
       <!-- Navigation -->
       <nav class="space-y-2 overflow-auto" style="max-height:calc(100vh - 160px);">
-        <button data-filter="all" class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">
-          أحدث المنتجات
-        </button>
-
-        <!-- PC -->
-        <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium pc-toggle">
-            <span class="flex items-center gap-2">🖥️ PC</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
-            </svg>
-          </button>
-          <div class="pc-submenu submenu mt-2 mr-2 ml-2 max-h-0 space-y-1 text-sm">
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">تجميعات جاهزة</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">كروت شاشة</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">معالجات</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">رامات</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">لوحات أم</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">تبريد</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">SSD / HDD</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">مزود طاقة</button>
-          </div>
-        </div>
-
-        <!-- Laptop -->
-        <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium laptop-toggle">
-            <span class="flex items-center gap-2">💻 Laptop</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
-            </svg>
-          </button>
-          <div class="laptop-submenu submenu mt-2 mr-2 ml-2 max-h-0 space-y-1 text-sm">
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">HP</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">Dell</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">Lenovo</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">Asus</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">MSI</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">Apple</button>
-          </div>
-        </div>
-
-        <!-- Phones -->
-        <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium phone-toggle">
-            <span class="flex items-center gap-2">📱 هواتف</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
-            </svg>
-          </button>
-          <div class="phone-submenu submenu mt-2 mr-2 ml-2 max-h-0 space-y-1 text-sm">
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">iPhone</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">Samsung</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">Xiaomi</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">Oppo</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">Infinix</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">Realme</button>
-          </div>
-        </div>
-
-        <!-- Consoles -->
-        <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium console-toggle">
-            <span class="flex items-center gap-2">🎮 Consoles</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
-            </svg>
-          </button>
-          <div class="console-submenu submenu mt-2 mr-2 ml-2 max-h-0 space-y-1 text-sm">
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">PlayStation</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">Xbox</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">Nintendo</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">Handheld</button>
-          </div>
-        </div>
-
-        <!-- Accessories -->
-        <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium acc-toggle">
-            <span class="flex items-center gap-2">🎧 إكسسوارات</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
-            </svg>
-          </button>
-          <div class="acc-submenu submenu mt-2 mr-2 ml-2 max-h-0 space-y-1 text-sm">
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">سماعات</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">لوحات مفاتيح</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">فأرات</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">مايكروفونات</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">كراسي وستاندات</button>
-          </div>
-        </div>
-
-        <!-- Screens -->
-        <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium screen-toggle">
-            <span class="flex items-center gap-2">🖼️ شاشات</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/>
-            </svg>
-          </button>
-          <div class="screen-submenu submenu mt-2 mr-2 ml-2 max-h-0 space-y-1 text-sm">
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">شاشات ألعاب</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">شاشات احترافية</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">4K / QHD</button>
-            <button class="side-item w-full text-right px-3 py-2 rounded-md">منحنية Curved</button>
-          </div>
-        </div>
-
+        <!-- الأقسام ... (كما هي في كودك) -->
+        <!-- ... -->
       </nav>
     </aside>
 
@@ -161,6 +54,17 @@
           <div id="authBtns" class="flex gap-3">
             <a href="signup.html" class="px-4 py-2 rounded-full bg-yellow-400 text-black font-semibold">إنشاء حساب</a>
             <a href="login.html" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition">تسجيل الدخول</a>
+          </div>
+
+          <!-- User Info (يظهر بعد تسجيل الدخول) -->
+          <div id="userBox" class="hidden items-center gap-3">
+            <img id="userPhoto" src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                 class="w-10 h-10 rounded-full border border-yellow-400 object-cover">
+            <span id="userName" class="font-semibold text-yellow-400">مستخدم</span>
+            <button id="logoutBtn"
+                    class="px-3 py-1.5 text-sm rounded-full bg-red-600 hover:bg-red-500 transition">
+              تسجيل الخروج
+            </button>
           </div>
         </div>
 
@@ -207,7 +111,6 @@
       const btn = document.querySelector(t.btn);
       const menu = document.querySelector(t.menu);
       const icon = btn.querySelector('.chev');
-
       btn.addEventListener('click', () => {
         if(menu.style.maxHeight && menu.style.maxHeight !== '0px'){
           menu.style.maxHeight = '0px';
@@ -216,6 +119,39 @@
         }
         icon.classList.toggle('open');
       });
+    });
+  </script>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { auth } from "./firebase-config.js";
+    import { onAuthStateChanged, signOut } 
+      from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+
+    const authBtns = document.getElementById("authBtns");
+    const userBox = document.getElementById("userBox");
+    const userName = document.getElementById("userName");
+    const userPhoto = document.getElementById("userPhoto");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    // ✅ مراقبة حالة المستخدم
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        authBtns.classList.add("hidden");
+        userBox.classList.remove("hidden");
+        userName.textContent = user.displayName || "مستخدم";
+        if (user.photoURL) userPhoto.src = user.photoURL;
+      } else {
+        authBtns.classList.remove("hidden");
+        userBox.classList.add("hidden");
+      }
+    });
+
+    // ✅ تسجيل الخروج
+    logoutBtn.addEventListener("click", async () => {
+      await signOut(auth);
+      alert("تم تسجيل الخروج ✅");
+      window.location.reload();
     });
   </script>
 </body>
