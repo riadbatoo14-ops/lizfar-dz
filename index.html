@@ -171,13 +171,21 @@
     });
   </script>
 
-<!-- ✅ Firebase Auth -->
-<script type="module">
-  import { auth } from "./firebase-config.js";
-  import { onAuthStateChanged, signOut } 
-    from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
-
-  const authBtns = document.getElementById("authBtns");
+<!-- 🔹 صندوق المستخدم -->
+const userBox = document.createElement("div");
+userBox.className = "hidden flex items-center cursor-pointer relative";
+userBox.innerHTML = `
+  <img id="userPhoto" class="w-10 h-10 rounded-full border-2 border-yellow-400 object-cover mr-2">
+  <span id="userName" class="font-semibold text-yellow-400 whitespace-nowrap"></span>
+  <button id="addProductBtn" class="hidden ml-4 px-3 py-1 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-300 transition whitespace-nowrap">
+    + 📦 عرض منتجك
+  </button>
+  <div id="dropdownMenu" class="hidden absolute top-12 right-0 bg-gray-800 border border-white/10 rounded-lg shadow-lg w-40 py-2 text-sm">
+    <button id="profileBtn" class="block w-full text-right px-4 py-2 hover:bg-white/10">👤 الملف الشخصي</button>
+    <button id="logoutBtn" class="block w-full text-right px-4 py-2 hover:bg-white/10 text-red-400">🚪 تسجيل الخروج</button>
+  </div>
+`;
+authBtns.parentElement.appendChild(userBox);
 
  <!-- 🔹 صندوق المستخدم -->
 const userBox = document.createElement("div");
@@ -274,4 +282,5 @@ authBtns.parentElement.appendChild(userBox);
 </script>
 </body>
 </html>
+
 
