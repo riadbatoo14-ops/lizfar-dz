@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>تسجيل الدخول | Lizfar DZ</title>
 
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
@@ -32,8 +33,11 @@
     <h1 class="text-2xl font-semibold mr-3">Lizfar DZ</h1>
   </div>
 
+  <!-- Loading message -->
+  <div id="loading" class="text-yellow-400 mb-4">جارٍ التحقق من الحالة...</div>
+
   <!-- Login Box -->
-  <div class="w-full max-w-md bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
+  <div id="loginBox" class="hidden w-full max-w-md bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
     <h2 class="text-xl font-semibold mb-6 text-center">تسجيل الدخول إلى حسابك</h2>
 
     <form id="loginForm" class="space-y-4">
@@ -59,8 +63,7 @@
         تسجيل الدخول
       </button>
 
-      <!-- 🔙 زر العودة إلى الصفحة الرئيسية -->
-      <a href="index.html" 
+      <a href="index.html"
          class="block w-full text-center mt-3 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition">
          العودة إلى الصفحة الرئيسية
       </a>
@@ -74,19 +77,26 @@
   <!-- Firebase -->
   <script type="module">
     import { auth } from "./firebase-config.js";
-    import { signInWithEmailAndPassword, onAuthStateChanged } 
+    import { signInWithEmailAndPassword, onAuthStateChanged }
       from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
+    const loginBox = document.getElementById("loginBox");
+    const loading = document.getElementById("loading");
     const form = document.getElementById("loginForm");
 
-    // ✅ إذا المستخدم مسجل دخول مسبقًا → إعادة توجيهه مباشرة
+    // ✅ تحقق من حالة المستخدم
     onAuthStateChanged(auth, (user) => {
+      loading.style.display = "none"; // إزالة رسالة التحميل
       if (user) {
+        // المستخدم مسجل دخول مسبقًا
         window.location.href = "index.html";
+      } else {
+        // عرض صفحة تسجيل الدخول
+        loginBox.classList.remove("hidden");
       }
     });
 
-    // ✅ عند تسجيل الدخول
+    // ✅ تسجيل الدخول
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
@@ -99,9 +109,7 @@
       }
 
       try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-
+        const { user } = await signInWithEmailAndPassword(auth, email, password);
         if (!user.emailVerified) {
           alert("⚠️ يرجى تفعيل بريدك الإلكتروني قبل تسجيل الدخول.");
           return;
