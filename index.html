@@ -40,17 +40,18 @@
           <p class="text-xs text-gray-400">سوق الأجهزة وقطع الحاسوب</p>
         </div>
       </div>
-  <!-- Navigation -->
+
+      <!-- Navigation -->
       <nav class="space-y-2 overflow-auto" style="max-height:calc(100vh - 160px);">
         <button data-filter="all" class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">أحدث المنتجات</button>
 
-        <!-- PC -->
+        <!-- الفئات -->
         <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium pc-toggle">
+          <button class="toggle-btn w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium" data-target="pc-submenu">
             <span>PC</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
+            <svg class="chev w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
           </button>
-          <div class="pc-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
+          <div id="pc-submenu" class="submenu mt-2 mr-2 ml-2 max-h-0 space-y-1 text-sm overflow-hidden">
             <button class="w-full text-right px-3 py-2 rounded-md side-item">تجميعات</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">كروت شاشة</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">معالجات</button>
@@ -62,13 +63,12 @@
           </div>
         </div>
 
-        <!-- Laptop -->
         <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium laptop-toggle">
+          <button class="toggle-btn w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium" data-target="laptop-submenu">
             <span>Laptop</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
+            <svg class="chev w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
           </button>
-          <div class="laptop-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
+          <div id="laptop-submenu" class="submenu mt-2 mr-2 ml-2 max-h-0 space-y-1 text-sm overflow-hidden">
             <button class="w-full text-right px-3 py-2 rounded-md side-item">HP</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">Dell</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">Lenovo</button>
@@ -78,13 +78,12 @@
           </div>
         </div>
 
-        <!-- Phones -->
         <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium phone-toggle">
+          <button class="toggle-btn w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium" data-target="phone-submenu">
             <span>هواتف</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
+            <svg class="chev w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
           </button>
-          <div class="phone-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
+          <div id="phone-submenu" class="submenu mt-2 mr-2 ml-2 max-h-0 space-y-1 text-sm overflow-hidden">
             <button class="w-full text-right px-3 py-2 rounded-md side-item">Samsung</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">Xiaomi</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">Huawei</button>
@@ -94,13 +93,12 @@
           </div>
         </div>
 
-        <!-- Consoles -->
         <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium console-toggle">
+          <button class="toggle-btn w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium" data-target="console-submenu">
             <span>Consoles</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
+            <svg class="chev w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
           </button>
-          <div class="console-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
+          <div id="console-submenu" class="submenu mt-2 mr-2 ml-2 max-h-0 space-y-1 text-sm overflow-hidden">
             <button class="w-full text-right px-3 py-2 rounded-md side-item">PlayStation</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">Xbox</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">Nintendo</button>
@@ -108,13 +106,12 @@
           </div>
         </div>
 
-        <!-- Accessories -->
         <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium acc-toggle">
+          <button class="toggle-btn w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium" data-target="acc-submenu">
             <span>إكسسوارات</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
+            <svg class="chev w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
           </button>
-          <div class="acc-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
+          <div id="acc-submenu" class="submenu mt-2 mr-2 ml-2 max-h-0 space-y-1 text-sm overflow-hidden">
             <button class="w-full text-right px-3 py-2 rounded-md side-item">فأرة</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">لوحة مفاتيح</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">سماعات</button>
@@ -130,14 +127,12 @@
       <!-- Header -->
       <header class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
         <div class="flex items-center gap-3">
-          <!-- Auth Buttons -->
           <div id="authBtns" class="flex gap-3">
             <a href="signup.html" class="px-4 py-2 rounded-full bg-yellow-400 text-black font-semibold">إنشاء حساب</a>
             <a href="login.html" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition">تسجيل الدخول</a>
           </div>
         </div>
 
-        <!-- Search -->
         <div class="flex-1 max-w-xl sm:ml-4 flex flex-col sm:flex-row gap-2">
           <input type="text" placeholder="ابحث عن منتج أو فئة..." class="flex-1 px-4 py-2 rounded-lg bg-white/10 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition">
           <select class="px-3 py-2 rounded-lg bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
@@ -152,7 +147,6 @@
         </div>
       </header>
 
-      <!-- Offers -->
       <section>
         <h2 class="text-2xl font-semibold mb-4">🔥 أفضل العروض</h2>
         <div id="offersSection" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
@@ -164,54 +158,41 @@
     </main>
   </div>
 
-  <!-- Sidebar Toggle Script -->
+  <!-- ✅ Sidebar Toggle Fixed -->
   <script>
-    const toggles = [
-      {btn: '.pc-toggle', menu: '.pc-submenu'},
-      {btn: '.laptop-toggle', menu: '.laptop-submenu'},
-      {btn: '.phone-toggle', menu: '.phone-submenu'},
-    ];
-    toggles.forEach(t => {
-      const btn = document.querySelector(t.btn);
-      const menu = document.querySelector(t.menu);
-      const icon = btn.querySelector('.chev');
-      btn.addEventListener('click', () => {
-        if(menu.style.maxHeight && menu.style.maxHeight !== '0px'){
-          menu.style.maxHeight = '0px';
-        } else {
-          menu.style.maxHeight = menu.scrollHeight + "px";
-        }
-        icon.classList.toggle('open');
+    document.querySelectorAll(".toggle-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = document.getElementById(btn.dataset.target);
+        const icon = btn.querySelector(".chev");
+
+        const isOpen = target.style.maxHeight && target.style.maxHeight !== "0px";
+        target.style.maxHeight = isOpen ? "0px" : target.scrollHeight + "px";
+        icon.classList.toggle("open", !isOpen);
       });
     });
   </script>
 
-  <!-- ✅ Firebase Auth Integration -->
+  <!-- ✅ Firebase Auth -->
   <script type="module">
     import { auth } from "./firebase-config.js";
     import { onAuthStateChanged, signOut } 
       from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
     const authBtns = document.getElementById("authBtns");
-
-    // إنشاء صندوق المستخدم
     const userBox = document.createElement("div");
     userBox.className = "hidden items-center gap-3 cursor-pointer";
     userBox.innerHTML = `
-      <img id="userPhoto" class="w-10 h-10 rounded-full border-2 border-yellow-400 object-cover" alt="صورة المستخدم">
+      <img id="userPhoto" class="w-10 h-10 rounded-full border-2 border-yellow-400 object-cover">
       <span id="userName" class="font-semibold text-yellow-400"></span>
     `;
     authBtns.parentElement.appendChild(userBox);
 
-    // مراقبة حالة المستخدم
     onAuthStateChanged(auth, (user) => {
       if (user) {
         authBtns.classList.add("hidden");
         userBox.classList.remove("hidden");
         document.getElementById("userName").textContent = user.displayName || "مستخدم";
         document.getElementById("userPhoto").src = user.photoURL || "https://cdn-icons-png.flaticon.com/512/149/149071.png";
-
-        // تسجيل خروج عند النقر على الصورة
         userBox.addEventListener("click", async () => {
           await signOut(auth);
           location.reload();
