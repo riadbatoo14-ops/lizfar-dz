@@ -18,6 +18,11 @@
       border-radius: 1rem;
       padding: 1.5rem;
       text-align: center;
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      background-color: rgba(255,255,255,0.15);
     }
   </style>
 </head>
@@ -69,33 +74,48 @@
     const productsList = document.getElementById("productsList");
 
     async function loadDashboardData() {
-      // 🟡 عدد المنتجات
-      const productsSnap = await getDocs(collection(db, "approved_products"));
-      const allProducts = productsSnap.docs.map(doc => doc.data());
-
-      productsCount.textContent = allProducts.length;
-      offersCount.textContent = allProducts.filter(p => p.offer === true).length;
-
-      // 🟢 عدد المستخدمين (لو عندك مجموعة users في Firestore)
       try {
-        const usersSnap = await getDocs(collection(db, "users"));
-        usersCount.textContent = usersSnap.size;
-      } catch {
-        usersCount.textContent = "N/A";
-      }
+        // 🟡 جلب المنتجات
+        const productsSnap = await getDocs(collection(db, "approved_products"));
+        const allProducts = productsSnap.docs.map(doc => doc.data());
 
-      // 🛒 عرض المنتجات
-      productsList.innerHTML = "";
-      allProducts.forEach(p => {
-        const card = `
-          <div class="card">
-            <img src="${p.image1 || '../assets/default-product.jpg'}" class="w-full h-40 object-cover rounded-lg mb-3">
-            <h3 class="text-lg font-semibold">${p.name}</h3>
-            <p class="text-yellow-400 font-bold">${p.price} دج</p>
-          </div>
-        `;
-        productsList.insertAdjacentHTML("beforeend", card);
-      });
+        productsCount.textContent = allProducts.length || 0;
+        offersCount.textContent = allProducts.filter(p => p.offer === true).length || 0;
+
+        // 🟢 جلب المستخدمين (إن وُجدت مجموعة users)
+        try {
+          const usersSnap = await getDocs(collection(db, "users"));
+          usersCount.textContent = usersSnap.size || 0;
+        } catch {
+          usersCount.textContent = "N/A";
+        }
+
+        // 🛒 عرض المنتجات
+        productsList.innerHTML = "";
+
+        if (allProducts.length === 0) {
+          productsList.innerHTML = `<p class="text-gray-400 text-center col-span-full">🚫 لا توجد منتجات بعد.</p>`;
+          return;
+        }
+
+        allProducts.forEach(p => {
+          const name = p.name || "منتج بدون اسم";
+          const image = p.image1 || "../assets/default-product.jpg";
+          const price = p.price ? `${p.price} دج` : "غير محدد";
+
+          const card = `
+            <div class="card">
+              <img src="${image}" class="w-full h-40 object-cover rounded-lg mb-3">
+              <h3 class="text-lg font-semibold">${name}</h3>
+              <p class="text-yellow-400 font-bold">${price}</p>
+            </div>
+          `;
+          productsList.insertAdjacentHTML("beforeend", card);
+        });
+      } catch (err) {
+        console.error("❌ خطأ أثناء تحميل البيانات:", err);
+        productsList.innerHTML = `<p class="text-red-400 text-center">حدث خطأ أثناء تحميل البيانات ⚠️</p>`;
+      }
     }
 
     loadDashboardData();
