@@ -85,47 +85,40 @@
     <!-- Main -->
     <main class="flex-1 p-6 lg:pl-8">
       <!-- Header -->
-      <header class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
-        <div class="flex items-center justify-between w-full sm:w-auto gap-6">
-          <!-- User -->
-          <div class="flex items-center gap-3">
-            <div class="relative" id="userMenu">
-              <button id="userBtn" class="flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 hover:bg-white/20 transition">
-                <img src="./assets/default-avatar.png" alt="User" class="w-8 h-8 rounded-full object-cover">
-                <span id="userNameHeader" class="text-sm font-medium">الضيف</span>
-              </button>
-              <div class="absolute left-0 mt-2 w-40 bg-gray-900/90 rounded-lg shadow-lg hidden" id="userDropdown">
-                <a href="profile.html" class="block px-4 py-2 hover:bg-gray-800">الملف الشخصي</a>
-                <button id="logoutBtn" class="w-full text-left px-4 py-2 hover:bg-gray-800">تسجيل الخروج</button>
-              </div>
+      <header class="flex flex-wrap items-center justify-between mb-8 gap-4">
+
+        <!-- يسار: المستخدم + عرض منتجك -->
+        <div class="flex items-center gap-4">
+          <div class="relative" id="userMenu">
+            <button id="userBtn" class="flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 hover:bg-white/20 transition">
+              <img id="userPhoto" src="./assets/default-avatar.png" alt="User" class="w-8 h-8 rounded-full object-cover">
+              <span id="userNameHeader" class="text-sm font-medium">الضيف</span>
+            </button>
+            <div class="absolute left-0 mt-2 w-40 bg-gray-900/90 rounded-lg shadow-lg hidden" id="userDropdown">
+              <a href="profile.html" class="block px-4 py-2 hover:bg-gray-800">الملف الشخصي</a>
+              <button id="logoutBtn" class="w-full text-left px-4 py-2 hover:bg-gray-800 text-red-400">تسجيل الخروج</button>
             </div>
           </div>
 
           <!-- زر عرض منتجك -->
-          <a href="add-product.html"
-             class="bg-yellow-400 text-black font-semibold px-4 py-2 rounded-full hover:bg-yellow-300 transition shadow-md">
+          <a id="addProductBtn" href="add-product.html"
+             class="hidden bg-yellow-400 text-black font-semibold px-4 py-2 rounded-full hover:bg-yellow-300 transition shadow-md">
              + عرض منتجك
           </a>
         </div>
 
-        <!-- أزرار تسجيل -->
+        <!-- 🔍 شريط البحث في المنتصف -->
+        <div class="flex-1 flex justify-center order-last sm:order-none">
+          <input type="text" placeholder="ابحث عن منتج أو فئة..."
+                 class="w-full sm:w-1/2 px-4 py-2 rounded-full bg-white/10 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition">
+        </div>
+
+        <!-- يمين: أزرار التسجيل -->
         <div id="authBtns" class="flex gap-3">
           <a href="signup.html" class="px-4 py-2 rounded-full bg-yellow-400 text-black font-semibold">إنشاء حساب</a>
           <a href="login.html" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition">تسجيل الدخول</a>
         </div>
       </header>
-
-      <!-- Search -->
-      <div class="flex-1 max-w-xl sm:ml-4 flex flex-col sm:flex-row gap-2 mb-6">
-        <input type="text" placeholder="ابحث عن منتج أو فئة..."
-               class="flex-1 px-4 py-2 rounded-lg bg-white/10 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition">
-        <select class="px-3 py-2 rounded-lg bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
-          <option>كل الفئات</option>
-          <option>PC</option>
-          <option>Laptop</option>
-          <option>هواتف</option>
-        </select>
-      </div>
 
       <!-- Offers -->
       <section>
@@ -138,6 +131,51 @@
       </footer>
     </main>
   </div>
+
+  <!-- ✅ Firebase -->
+  <script type="module">
+    import { auth } from "./firebase-config.js";
+    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+
+    const authBtns = document.getElementById("authBtns");
+    const userName = document.getElementById("userNameHeader");
+    const userPhoto = document.getElementById("userPhoto");
+    const addProductBtn = document.getElementById("addProductBtn");
+    const userDropdown = document.getElementById("userDropdown");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const userBtn = document.getElementById("userBtn");
+
+    // 🔥 تحديث حالة المستخدم
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        authBtns.classList.add("hidden");
+        addProductBtn.classList.remove("hidden");
+        userName.textContent = user.displayName || "مستخدم";
+        userPhoto.src = user.photoURL || "./assets/default-avatar.png";
+      } else {
+        authBtns.classList.remove("hidden");
+        addProductBtn.classList.add("hidden");
+        userName.textContent = "الضيف";
+        userPhoto.src = "./assets/default-avatar.png";
+      }
+    });
+
+    // ✅ فتح/إغلاق القائمة
+    userBtn.addEventListener("click", () => userDropdown.classList.toggle("hidden"));
+
+    // ✅ تسجيل الخروج
+    logoutBtn.addEventListener("click", async () => {
+      await signOut(auth);
+      location.reload();
+    });
+
+    // ✅ إغلاق القائمة عند الضغط خارجها
+    document.addEventListener("click", (e) => {
+      if (!userDropdown.contains(e.target) && !userBtn.contains(e.target)) {
+        userDropdown.classList.add("hidden");
+      }
+    });
+  </script>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -158,12 +196,6 @@
           });
         }
       });
-
-      const userBtn = document.getElementById("userBtn");
-      const dropdown = document.getElementById("userDropdown");
-      if (userBtn && dropdown) {
-        userBtn.addEventListener("click", () => dropdown.classList.toggle("hidden"));
-      }
     });
   </script>
 </body>
