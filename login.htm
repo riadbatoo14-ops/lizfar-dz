@@ -11,16 +11,19 @@
     body {
       font-family: "Cairo", sans-serif;
       background-color: #0b1220;
-      background-image: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.03), transparent 2%),
-                        radial-gradient(circle at 90% 90%, rgba(255,255,255,0.02), transparent 2%),
-                        linear-gradient(120deg, rgba(255,255,255,0.03), transparent 10%);
+      background-image:
+        radial-gradient(circle at 10% 10%, rgba(255,255,255,0.03), transparent 2%),
+        radial-gradient(circle at 90% 90%, rgba(255,255,255,0.02), transparent 2%),
+        linear-gradient(120deg, rgba(255,255,255,0.03), transparent 10%);
     }
     input {
       background-color: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.1);
       color: white;
     }
-    input::placeholder { color: rgba(255,255,255,0.4); }
+    input::placeholder {
+      color: rgba(255,255,255,0.4);
+    }
   </style>
 </head>
 
@@ -59,8 +62,8 @@
         تسجيل الدخول
       </button>
 
-      <!-- 🔙 زر العودة إلى الصفحة الرئيسية -->
-      <a href="index.html" 
+      <!-- 🔙 العودة إلى الصفحة الرئيسية -->
+      <a href="index.html"
          class="block w-full text-center mt-3 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition">
          العودة إلى الصفحة الرئيسية
       </a>
@@ -74,12 +77,14 @@
   <!-- Firebase -->
   <script type="module">
     import { auth } from "./firebase-config.js";
-    import { signInWithEmailAndPassword, onAuthStateChanged } 
-      from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+    import {
+      signInWithEmailAndPassword,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
     const form = document.getElementById("loginForm");
 
-    // ✅ إذا المستخدم مسجل دخول مسبقًا → إعادة توجيهه مباشرة
+    // ✅ إذا المستخدم مسجل دخول مسبقًا → توجيهه مباشرة
     onAuthStateChanged(auth, (user) => {
       if (user) {
         window.location.href = "index.html";
@@ -110,6 +115,7 @@
         alert("✅ تم تسجيل الدخول بنجاح!");
         window.location.href = "index.html";
       } catch (error) {
+        console.error("Firebase Auth Error:", error.code, error.message);
         if (error.code === "auth/user-not-found") {
           alert("❌ المستخدم غير موجود.");
         } else if (error.code === "auth/wrong-password") {
@@ -117,7 +123,7 @@
         } else if (error.code === "auth/invalid-email") {
           alert("⚠️ البريد الإلكتروني غير صالح.");
         } else {
-          alert("❌ خطأ: " + error.message);
+          alert("❌ حدث خطأ أثناء تسجيل الدخول.");
         }
       }
     });
