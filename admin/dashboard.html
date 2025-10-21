@@ -1,2 +1,104 @@
-<script type="module" src="../js/firebase-config.js"></script>
-<script type="module" src="../js/auth-guard.js"></script>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>لوحة التحكم | Lizfar DZ</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+    body {
+      font-family: "Cairo", sans-serif;
+      background-color: #0b1220;
+      color: white;
+    }
+    .card {
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen p-6">
+
+  <!-- 🔹 Header -->
+  <header class="flex justify-between items-center mb-8">
+    <h1 class="text-3xl font-bold text-yellow-400">📊 لوحة تحكم المشرف</h1>
+    <a href="../index.html" class="text-gray-300 hover:text-yellow-400">🏠 العودة للموقع</a>
+  </header>
+
+  <!-- 🔸 الإحصائيات -->
+  <section class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+    <div class="card">
+      <h2 class="text-lg font-semibold mb-2">عدد المستخدمين</h2>
+      <p id="usersCount" class="text-3xl font-bold text-yellow-400">—</p>
+    </div>
+
+    <div class="card">
+      <h2 class="text-lg font-semibold mb-2">عدد المنتجات</h2>
+      <p id="productsCount" class="text-3xl font-bold text-yellow-400">—</p>
+    </div>
+
+    <div class="card">
+      <h2 class="text-lg font-semibold mb-2">عدد العروض المفعلة</h2>
+      <p id="offersCount" class="text-3xl font-bold text-yellow-400">—</p>
+    </div>
+  </section>
+
+  <!-- 🔹 قائمة المنتجات -->
+  <section>
+    <h2 class="text-2xl font-semibold mb-4">🛍️ جميع المنتجات</h2>
+    <div id="productsList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </section>
+
+  <!-- Scripts -->
+  <script type="module" src="../js/firebase-config.js"></script>
+  <script type="module" src="../js/auth-guard.js"></script>
+
+  <script type="module">
+    import { db } from "../js/firebase-config.js";
+    import { collection, getDocs } 
+      from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+
+    const usersCount = document.getElementById("usersCount");
+    const productsCount = document.getElementById("productsCount");
+    const offersCount = document.getElementById("offersCount");
+    const productsList = document.getElementById("productsList");
+
+    async function loadDashboardData() {
+      // 🟡 عدد المنتجات
+      const productsSnap = await getDocs(collection(db, "approved_products"));
+      const allProducts = productsSnap.docs.map(doc => doc.data());
+
+      productsCount.textContent = allProducts.length;
+      offersCount.textContent = allProducts.filter(p => p.offer === true).length;
+
+      // 🟢 عدد المستخدمين (لو عندك مجموعة users في Firestore)
+      try {
+        const usersSnap = await getDocs(collection(db, "users"));
+        usersCount.textContent = usersSnap.size;
+      } catch {
+        usersCount.textContent = "N/A";
+      }
+
+      // 🛒 عرض المنتجات
+      productsList.innerHTML = "";
+      allProducts.forEach(p => {
+        const card = `
+          <div class="card">
+            <img src="${p.image1 || '../assets/default-product.jpg'}" class="w-full h-40 object-cover rounded-lg mb-3">
+            <h3 class="text-lg font-semibold">${p.name}</h3>
+            <p class="text-yellow-400 font-bold">${p.price} دج</p>
+          </div>
+        `;
+        productsList.insertAdjacentHTML("beforeend", card);
+      });
+    }
+
+    loadDashboardData();
+  </script>
+</body>
+</html>
