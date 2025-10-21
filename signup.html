@@ -187,6 +187,46 @@
     });
   </script>
   <script type="module" src="js/firebase-config.js"></script>
+  import { getAuth, createUserWithEmailAndPassword } 
+  from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+
+import { db } from "./js/firebase-config.js";
+import { setDoc, doc } 
+  from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+
+// عناصر الإدخال من النموذج
+const signupForm = document.getElementById("signupForm");
+
+signupForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const auth = getAuth();
+
+  try {
+    // إنشاء المستخدم في Firebase Auth
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    // حفظ بيانات المستخدم في Firestore
+    await setDoc(doc(db, "users", user.uid), {
+      name: name,
+      email: email,
+      role: "user",  // 🟡 هنا نحدد دوره كمستخدم عادي
+      createdAt: new Date()
+    });
+
+    alert("تم إنشاء الحساب بنجاح 🎉");
+    window.location.href = "login.html";
+
+  } catch (error) {
+    alert("حدث خطأ أثناء التسجيل: " + error.message);
+  }
+});
 </body>
 </html>
+
 
