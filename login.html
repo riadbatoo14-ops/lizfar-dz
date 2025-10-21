@@ -74,9 +74,10 @@
     © 2025 Lizfar DZ — كل الحقوق محفوظة
   </footer>
 
-  <!-- Firebase -->
+  <!-- ✅ Firebase + Login Script -->
+  <script type="module" src="js/firebase-config.js"></script>
   <script type="module">
-    import { auth } from "./firebase-config.js";
+    import { auth } from "./js/firebase-config.js";
     import {
       signInWithEmailAndPassword,
       onAuthStateChanged
@@ -107,13 +108,17 @@
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        if (!user.emailVerified) {
-          alert("⚠️ يرجى تفعيل بريدك الإلكتروني قبل تسجيل الدخول.");
-          return;
+        // 🔹 بعد تسجيل الدخول → التوجيه حسب الدور
+        const response = await fetch(`https://firestore.googleapis.com/v1/projects/lizfar-dz/databases/(default)/documents/users/${user.uid}`);
+        const data = await response.json();
+        const role = data.fields?.role?.stringValue || "user";
+
+        if (role === "admin") {
+          window.location.href = "admin/dashboard.html";
+        } else {
+          window.location.href = "index.html";
         }
 
-        alert("✅ تم تسجيل الدخول بنجاح!");
-        window.location.href = "index.html";
       } catch (error) {
         console.error("Firebase Auth Error:", error.code, error.message);
         if (error.code === "auth/user-not-found") {
@@ -127,9 +132,6 @@
         }
       }
     });
-    <script type="module" src="js/firebase-config.js"></script>
   </script>
 </body>
 </html>
-
-
