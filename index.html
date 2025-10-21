@@ -86,37 +86,46 @@
     <main class="flex-1 p-6 lg:pl-8">
       <!-- Header -->
       <header class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
-        <div class="flex items-center gap-3">
+        <div class="flex items-center justify-between w-full sm:w-auto gap-6">
           <!-- User -->
-          <div class="relative" id="userMenu">
-            <button id="userBtn" class="flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 hover:bg-white/20 transition">
-              <img src="./assets/default-avatar.png" alt="User" class="w-8 h-8 rounded-full object-cover">
-              <span id="userNameHeader" class="text-sm font-medium">الضيف</span>
-            </button>
-            <div class="absolute left-0 mt-2 w-40 bg-gray-900/90 rounded-lg shadow-lg hidden" id="userDropdown">
-              <a href="profile.html" class="block px-4 py-2 hover:bg-gray-800">الملف الشخصي</a>
-              <button id="logoutBtn" class="w-full text-left px-4 py-2 hover:bg-gray-800">تسجيل الخروج</button>
+          <div class="flex items-center gap-3">
+            <div class="relative" id="userMenu">
+              <button id="userBtn" class="flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 hover:bg-white/20 transition">
+                <img src="./assets/default-avatar.png" alt="User" class="w-8 h-8 rounded-full object-cover">
+                <span id="userNameHeader" class="text-sm font-medium">الضيف</span>
+              </button>
+              <div class="absolute left-0 mt-2 w-40 bg-gray-900/90 rounded-lg shadow-lg hidden" id="userDropdown">
+                <a href="profile.html" class="block px-4 py-2 hover:bg-gray-800">الملف الشخصي</a>
+                <button id="logoutBtn" class="w-full text-left px-4 py-2 hover:bg-gray-800">تسجيل الخروج</button>
+              </div>
             </div>
           </div>
 
-          <div id="authBtns" class="flex gap-3">
-            <a href="signup.html" class="px-4 py-2 rounded-full bg-yellow-400 text-black font-semibold">إنشاء حساب</a>
-            <a href="login.html" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition">تسجيل الدخول</a>
-          </div>
+          <!-- زر عرض منتجك -->
+          <a href="add-product.html"
+             class="bg-yellow-400 text-black font-semibold px-4 py-2 rounded-full hover:bg-yellow-300 transition shadow-md">
+             + عرض منتجك
+          </a>
         </div>
 
-        <!-- Search -->
-        <div class="flex-1 max-w-xl sm:ml-4 flex flex-col sm:flex-row gap-2">
-          <input type="text" placeholder="ابحث عن منتج أو فئة..."
-                 class="flex-1 px-4 py-2 rounded-lg bg-white/10 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition">
-          <select class="px-3 py-2 rounded-lg bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
-            <option>كل الفئات</option>
-            <option>PC</option>
-            <option>Laptop</option>
-            <option>هواتف</option>
-          </select>
+        <!-- أزرار تسجيل -->
+        <div id="authBtns" class="flex gap-3">
+          <a href="signup.html" class="px-4 py-2 rounded-full bg-yellow-400 text-black font-semibold">إنشاء حساب</a>
+          <a href="login.html" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition">تسجيل الدخول</a>
         </div>
       </header>
+
+      <!-- Search -->
+      <div class="flex-1 max-w-xl sm:ml-4 flex flex-col sm:flex-row gap-2 mb-6">
+        <input type="text" placeholder="ابحث عن منتج أو فئة..."
+               class="flex-1 px-4 py-2 rounded-lg bg-white/10 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition">
+        <select class="px-3 py-2 rounded-lg bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
+          <option>كل الفئات</option>
+          <option>PC</option>
+          <option>Laptop</option>
+          <option>هواتف</option>
+        </select>
+      </div>
 
       <!-- Offers -->
       <section>
@@ -131,7 +140,6 @@
   </div>
 
   <script>
-    // تأكد أن كل العناصر موجودة قبل تنفيذ الكود
     document.addEventListener("DOMContentLoaded", () => {
       const toggles = [
         {btn: '.pc-toggle', menu: '.pc-submenu'},
