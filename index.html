@@ -1,96 +1,206 @@
-<script type="module">
-  import { auth } from "./firebase-config.js";
-  import { onAuthStateChanged, signOut } 
-    from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ليزفار DZ — الصفحة الرئيسية</title>
 
-  const authBtns = document.getElementById("authBtns");
-
-  // 🔹 إنشاء صندوق المستخدم
-  const userBox = document.createElement("div");
-  userBox.className = "hidden flex items-center gap-3 relative transition-all duration-300";
-  userBox.innerHTML = `
-    <!-- صورة المستخدم -->
-    <img id="userPhoto" class="w-10 h-10 rounded-full border-2 border-yellow-400 object-cover transition hover:scale-105">
-
-    <!-- الاسم -->
-    <span id="userName" class="font-semibold text-yellow-400"></span>
-
-    <!-- زر عرض منتجك -->
-    <button id="addProductBtn"
-      class="hidden ml-6 px-3 py-1 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-300 transition">
-      + 📦 عرض منتجك
-    </button>
-
-    <!-- قائمة منسدلة -->
-    <div id="dropdownMenu"
-      class="hidden absolute top-12 right-0 bg-gray-800 border border-white/10 rounded-lg shadow-lg w-40 py-2 text-sm">
-      <button id="profileBtn"
-        class="block w-full text-right px-4 py-2 hover:bg-white/10">👤 الملف الشخصي</button>
-      <button id="logoutBtn"
-        class="block w-full text-right px-4 py-2 hover:bg-white/10 text-red-400">🚪 تسجيل الخروج</button>
-    </div>
-  `;
-
-  // إضافة الصندوق داخل رأس الصفحة
-  authBtns.parentElement.appendChild(userBox);
-
-  const addProductBtn = document.getElementById("addProductBtn");
-  const loadingIndicator = document.createElement("div");
-  loadingIndicator.className = "text-yellow-400 text-sm animate-pulse";
-  loadingIndicator.textContent = "جاري التحميل...";
-  authBtns.parentElement.appendChild(loadingIndicator);
-
-  // 🔥 متابعة حالة تسجيل الدخول
-  onAuthStateChanged(auth, (user) => {
-    loadingIndicator.classList.add("hidden");
-
-    if (user) {
-      // ✅ المستخدم مسجل دخول
-      authBtns.classList.add("hidden");
-      userBox.classList.remove("hidden");
-      addProductBtn.classList.remove("hidden");
-
-      const nameEl = document.getElementById("userName");
-      const photoEl = document.getElementById("userPhoto");
-      nameEl.textContent = user.displayName || "مستخدم";
-      photoEl.src = user.photoURL || "https://cdn-icons-png.flaticon.com/512/149/149071.png";
-
-      // 🔽 القائمة المنسدلة
-      const dropdown = document.getElementById("dropdownMenu");
-      photoEl.addEventListener("click", (e) => {
-        e.stopPropagation();
-        dropdown.classList.toggle("hidden");
-      });
-
-      // 🚪 تسجيل الخروج
-      document.getElementById("logoutBtn").addEventListener("click", async () => {
-        await signOut(auth);
-        window.location.href = "login.html"; // ✅ بدل التحديث
-      });
-
-      // 👤 الملف الشخصي
-      document.getElementById("profileBtn").addEventListener("click", () => {
-        window.location.href = "profile.html";
-      });
-
-      // 📦 عرض منتجك
-      addProductBtn.addEventListener("click", () => {
-        window.location.href = "add-product.html";
-      });
-
-    } else {
-      // ❌ المستخدم غير مسجل
-      authBtns.classList.remove("hidden");
-      userBox.classList.add("hidden");
-      addProductBtn.classList.add("hidden");
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+    body { font-family: "Cairo", sans-serif; background-color: #0b1220; }
+    .bg-tech {
+      background-image:
+        radial-gradient(circle at 10% 10%, rgba(255,255,255,0.02), transparent 2%),
+        radial-gradient(circle at 90% 90%, rgba(255,255,255,0.01), transparent 2%),
+        linear-gradient(120deg, rgba(255,255,255,0.02), transparent 10%);
+      background-blend-mode: overlay;
     }
-  });
+    .side-item:hover { background: rgba(255,255,255,0.03); }
+    .chev { transition: transform .25s ease; }
+    .chev.open { transform: rotate(-90deg); }
+    select option { color: black; }
+  </style>
+</head>
 
-  // إغلاق القائمة عند النقر خارجها
-  document.addEventListener("click", (e) => {
-    const dropdown = document.getElementById("dropdownMenu");
-    if (dropdown && !dropdown.contains(e.target) && !e.target.closest("#userPhoto")) {
-      dropdown.classList.add("hidden");
-    }
-  });
-</script>
+<body class="min-h-screen text-white bg-gradient-to-br from-gray-900 via-gray-800 to-black bg-tech">
+  <div class="min-h-screen flex">
+
+    <!-- Sidebar -->
+    <aside class="w-72 bg-gray-900/70 border-r border-white/5 p-4 hidden lg:block">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-lg bg-yellow-400 flex items-center justify-center text-black font-bold">LZ</div>
+        <div>
+          <h1 class="text-lg font-semibold">ليزفار DZ</h1>
+          <p class="text-xs text-gray-400">سوق الأجهزة وقطع الحاسوب</p>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="space-y-2 overflow-auto" style="max-height:calc(100vh - 160px);">
+        <button data-filter="all" class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">أحدث المنتجات</button>
+
+        <!-- PC -->
+        <div>
+          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium pc-toggle">
+            <span>PC</span>
+            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="pc-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">تجميعات</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">كروت شاشة</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">معالجات</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">رامات</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">كروت أم</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">مراوح تبريد</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">SSD / HDD</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">وحدة الطاقة</button>
+          </div>
+        </div>
+
+        <!-- Laptop -->
+        <div>
+          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium laptop-toggle">
+            <span>Laptop</span>
+            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="laptop-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">HP</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">Dell</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">Lenovo</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">Asus</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">MSI</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">Apple</button>
+          </div>
+        </div>
+
+        <!-- Phones -->
+        <div>
+          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium phone-toggle">
+            <span>هواتف</span>
+            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="phone-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">Samsung</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">Xiaomi</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">Huawei</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">Oppo</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">Infinix</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">iPhone</button>
+          </div>
+        </div>
+
+        <!-- Consoles -->
+        <div>
+          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium console-toggle">
+            <span>Consoles</span>
+            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="console-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">PlayStation</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">Xbox</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">Nintendo</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">Handhelds</button>
+          </div>
+        </div>
+
+        <!-- Accessories -->
+        <div>
+          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium acc-toggle">
+            <span>إكسسوارات</span>
+            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="acc-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">فأرة</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">لوحة مفاتيح</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">سماعات</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">إكسسوارات الحاسوب</button>
+            <button class="w-full text-right px-3 py-2 rounded-md side-item">إكسسوارات الهاتف</button>
+          </div>
+        </div>
+
+        <!-- Screens -->
+        <button data-filter="screens" class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">شاشات</button>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1 p-6 lg:pl-8">
+      <!-- Header -->
+      <header class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
+        <div class="flex items-center gap-3">
+          <!-- User menu -->
+          <div class="relative" id="userMenu">
+            <button id="userBtn" class="flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 hover:bg-white/20 transition">
+              <img src="./assets/default-avatar.png" alt="User" class="w-8 h-8 rounded-full object-cover" id="userAvatar">
+              <span id="userNameHeader" class="text-sm font-medium">الضيف</span>
+            </button>
+            <div class="absolute left-0 mt-2 w-40 bg-gray-900/90 rounded-lg shadow-lg hidden" id="userDropdown">
+              <a href="profile.html" class="block px-4 py-2 hover:bg-gray-800">الملف الشخصي</a>
+              <button id="logoutBtn" class="w-full text-left px-4 py-2 hover:bg-gray-800">تسجيل الخروج</button>
+            </div>
+          </div>
+
+          <div id="authBtns" class="flex gap-3">
+            <a href="signup.html" class="px-4 py-2 rounded-full bg-yellow-400 text-black font-semibold">إنشاء حساب</a>
+            <a href="login.html" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition">تسجيل الدخول</a>
+          </div>
+        </div>
+
+        <!-- Search -->
+        <div class="flex-1 max-w-xl sm:ml-4 flex flex-col sm:flex-row gap-2">
+          <input type="text" placeholder="ابحث عن منتج أو فئة..."
+                 class="flex-1 px-4 py-2 rounded-lg bg-white/10 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition">
+          <select class="px-3 py-2 rounded-lg bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
+            <option>كل الفئات</option>
+            <option>PC</option>
+            <option>Laptop</option>
+            <option>هواتف</option>
+            <option>Consoles</option>
+            <option>إكسسوارات</option>
+            <option>شاشات</option>
+          </select>
+        </div>
+      </header>
+
+      <!-- Offers -->
+      <section>
+        <h2 class="text-2xl font-semibold mb-4">🔥 أفضل العروض</h2>
+        <div id="offersSection" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+      </section>
+
+      <footer class="text-xs text-gray-400 mt-12">
+        © 2025 Lizfar DZ — كل الحقوق محفوظة
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Dropdown toggles
+    const toggles = [
+      {btn: '.pc-toggle', menu: '.pc-submenu'},
+      {btn: '.laptop-toggle', menu: '.laptop-submenu'},
+      {btn: '.phone-toggle', menu: '.phone-submenu'},
+      {btn: '.console-toggle', menu: '.console-submenu'},
+      {btn: '.acc-toggle', menu: '.acc-submenu'},
+    ];
+    toggles.forEach(t => {
+      const btn = document.querySelector(t.btn);
+      const menu = document.querySelector(t.menu);
+      const icon = btn.querySelector('.chev');
+      btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+        icon.classList.toggle('open');
+      });
+    });
+
+    // User menu
+    const userBtn = document.getElementById("userBtn");
+    const dropdown = document.getElementById("userDropdown");
+    userBtn.addEventListener("click", () => dropdown.classList.toggle("hidden"));
+  </script>
+</body>
+</html>
+
+
