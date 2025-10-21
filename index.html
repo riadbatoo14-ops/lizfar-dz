@@ -1,64 +1,92 @@
 <script type="module">
   import { auth } from "./firebase-config.js";
-  import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+  import { onAuthStateChanged, signOut } 
+    from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
   const authBtns = document.getElementById("authBtns");
 
   // 🔹 إنشاء صندوق المستخدم
   const userBox = document.createElement("div");
-  userBox.className = "hidden flex items-center gap-2 cursor-pointer relative";
+  userBox.className = "hidden flex items-center gap-3 relative transition-all duration-300";
   userBox.innerHTML = `
-    <img id="userPhoto" class="w-10 h-10 rounded-full border-2 border-yellow-400 object-cover">
+    <!-- صورة المستخدم -->
+    <img id="userPhoto" class="w-10 h-10 rounded-full border-2 border-yellow-400 object-cover transition hover:scale-105">
+
+    <!-- الاسم -->
     <span id="userName" class="font-semibold text-yellow-400"></span>
-    <button id="addProductBtn" class="hidden px-3 py-1 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-300 transition">
+
+    <!-- زر عرض منتجك -->
+    <button id="addProductBtn"
+      class="hidden ml-6 px-3 py-1 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-300 transition">
       + 📦 عرض منتجك
     </button>
-    <div id="dropdownMenu" class="hidden absolute top-12 right-0 bg-gray-800 border border-white/10 rounded-lg shadow-lg w-40 py-2 text-sm">
-      <button id="profileBtn" class="block w-full text-right px-4 py-2 hover:bg-white/10">👤 الملف الشخصي</button>
-      <button id="logoutBtn" class="block w-full text-right px-4 py-2 hover:bg-white/10 text-red-400">🚪 تسجيل الخروج</button>
+
+    <!-- قائمة منسدلة -->
+    <div id="dropdownMenu"
+      class="hidden absolute top-12 right-0 bg-gray-800 border border-white/10 rounded-lg shadow-lg w-40 py-2 text-sm">
+      <button id="profileBtn"
+        class="block w-full text-right px-4 py-2 hover:bg-white/10">👤 الملف الشخصي</button>
+      <button id="logoutBtn"
+        class="block w-full text-right px-4 py-2 hover:bg-white/10 text-red-400">🚪 تسجيل الخروج</button>
     </div>
   `;
+
+  // إضافة الصندوق داخل رأس الصفحة
   authBtns.parentElement.appendChild(userBox);
 
   const addProductBtn = document.getElementById("addProductBtn");
+  const loadingIndicator = document.createElement("div");
+  loadingIndicator.className = "text-yellow-400 text-sm animate-pulse";
+  loadingIndicator.textContent = "جاري التحميل...";
+  authBtns.parentElement.appendChild(loadingIndicator);
 
   // 🔥 متابعة حالة تسجيل الدخول
   onAuthStateChanged(auth, (user) => {
+    loadingIndicator.classList.add("hidden");
+
     if (user) {
+      // ✅ المستخدم مسجل دخول
       authBtns.classList.add("hidden");
       userBox.classList.remove("hidden");
       addProductBtn.classList.remove("hidden");
 
-      document.getElementById("userName").textContent = user.displayName || "مستخدم";
-      document.getElementById("userPhoto").src = user.photoURL || "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+      const nameEl = document.getElementById("userName");
+      const photoEl = document.getElementById("userPhoto");
+      nameEl.textContent = user.displayName || "مستخدم";
+      photoEl.src = user.photoURL || "https://cdn-icons-png.flaticon.com/512/149/149071.png";
 
-      // فتح/إغلاق القائمة عند النقر على الصورة
+      // 🔽 القائمة المنسدلة
       const dropdown = document.getElementById("dropdownMenu");
-      const photo = document.getElementById("userPhoto");
-      photo.addEventListener("click", () => dropdown.classList.toggle("hidden"));
-
-      document.getElementById("logoutBtn").addEventListener("click", async () => {
-        await signOut(auth);
-        location.reload();
+      photoEl.addEventListener("click", (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle("hidden");
       });
 
+      // 🚪 تسجيل الخروج
+      document.getElementById("logoutBtn").addEventListener("click", async () => {
+        await signOut(auth);
+        window.location.href = "login.html"; // ✅ بدل التحديث
+      });
+
+      // 👤 الملف الشخصي
       document.getElementById("profileBtn").addEventListener("click", () => {
         window.location.href = "profile.html";
       });
 
-      // 📦 زر عرض المنتج
+      // 📦 عرض منتجك
       addProductBtn.addEventListener("click", () => {
         window.location.href = "add-product.html";
       });
 
     } else {
+      // ❌ المستخدم غير مسجل
       authBtns.classList.remove("hidden");
       userBox.classList.add("hidden");
       addProductBtn.classList.add("hidden");
     }
   });
 
-  // إغلاق القائمة عند الضغط خارجها
+  // إغلاق القائمة عند النقر خارجها
   document.addEventListener("click", (e) => {
     const dropdown = document.getElementById("dropdownMenu");
     if (dropdown && !dropdown.contains(e.target) && !e.target.closest("#userPhoto")) {
