@@ -204,19 +204,23 @@
     const userBtn = document.getElementById("userBtn");
 
     // 🔥 تحديث حالة المستخدم
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        authBtns.classList.add("hidden");
-        addProductBtn.classList.remove("hidden");
-        userName.textContent = user.displayName || "مستخدم";
-        userPhoto.src = user.photoURL || "./assets/default-avatar.png";
-      } else {
-        authBtns.classList.remove("hidden");
-        addProductBtn.classList.add("hidden");
-        userName.textContent = "الضيف";
-        userPhoto.src = "./assets/default-avatar.png";
-      }
-    });
+   document.addEventListener("DOMContentLoaded", () => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // ✅ المستخدم مسجل دخول
+      authBtns.classList.add("hidden");
+      addProductBtn.classList.remove("hidden");
+      userName.textContent = user.displayName || "مستخدم";
+      userPhoto.src = user.photoURL || "./assets/default-avatar.png";
+    } else {
+      // 🚫 المستخدم غير مسجل دخول
+      authBtns.classList.remove("hidden");
+      addProductBtn.classList.add("hidden");
+      userName.textContent = "الضيف";
+      userPhoto.src = "./assets/default-avatar.png";
+    }
+  });
+});
 
     // ✅ فتح/إغلاق القائمة
     userBtn.addEventListener("click", () => userDropdown.classList.toggle("hidden"));
@@ -272,4 +276,5 @@
   </script>
 </body>
 </html>
+
 
