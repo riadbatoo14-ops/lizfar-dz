@@ -210,7 +210,8 @@
       // ✅ المستخدم مسجل دخول
       authBtns.classList.add("hidden");
       addProductBtn.classList.remove("hidden");
-      userName.textContent = user.displayName || "مستخدم";
+      // ✅ إظهار اسم المستخدم أو البريد الإلكتروني
+userName.textContent = user.displayName || user.email.split("@")[0] || "مستخدم";
       userPhoto.src = user.photoURL || "./assets/default-avatar.png";
     } else {
       // 🚫 المستخدم غير مسجل دخول
@@ -276,5 +277,6 @@
   </script>
 </body>
 </html>
+
 
 
