@@ -37,8 +37,9 @@
         </div>
       </div>
 
-         <nav class="space-y-2 overflow-auto" style="max-height:calc(100vh - 160px);">
-        <button data-filter="all" class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">أحدث المنتجات</button>
+      <!-- Navigation -->
+      <nav class="space-y-2 overflow-auto" style="max-height:calc(100vh - 160px);">
+        <button class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">أحدث المنتجات</button>
 
         <!-- PC -->
         <div>
@@ -50,11 +51,6 @@
             <button class="w-full text-right px-3 py-2 rounded-md side-item">تجميعات</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">كروت شاشة</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">معالجات</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">رامات</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">كروت أم</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">مراوح تبريد</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">SSD / HDD</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">وحدة الطاقة</button>
           </div>
         </div>
 
@@ -66,11 +62,7 @@
           </button>
           <div class="laptop-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
             <button class="w-full text-right px-3 py-2 rounded-md side-item">HP</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">Dell</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">Lenovo</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">Asus</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">MSI</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">Apple</button>
           </div>
         </div>
 
@@ -82,42 +74,13 @@
           </button>
           <div class="phone-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
             <button class="w-full text-right px-3 py-2 rounded-md side-item">Samsung</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">Xiaomi</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">Huawei</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">Oppo</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">Infinix</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">iPhone</button>
           </div>
         </div>
 
-        <!-- Consoles -->
-        <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium console-toggle">
-            <span>Consoles</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
-          </button>
-          <div class="console-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">PlayStation</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">Xbox</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">Nintendo</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">Handhelds</button>
-          </div>
-        </div>
-
-        <!-- Accessories -->
-        <div>
-          <button class="w-full text-right side-item px-3 py-2 rounded-md flex items-center justify-between text-sm font-medium acc-toggle">
-            <span>إكسسوارات</span>
-            <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
-          </button>
-          <div class="acc-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">فأرة</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">لوحة مفاتيح</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">سماعات</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">إكسسوارات الحاسوب</button>
-            <button class="w-full text-right px-3 py-2 rounded-md side-item">إكسسوارات الهاتف</button>
-          </div>
-        </div>
+        <button class="w-full text-right side-item px-3 py-2 rounded-md text-sm font-medium">شاشات</button>
+      </nav>
+    </aside>
 
     <!-- Main -->
     <main class="flex-1 p-6 lg:pl-8">
@@ -143,21 +106,12 @@
              + عرض منتجك
           </a>
         </div>
-        </header>
+
         <!-- 🔍 شريط البحث في المنتصف -->
         <div class="flex-1 flex justify-center order-last sm:order-none">
           <input type="text" placeholder="ابحث عن منتج أو فئة..."
                  class="w-full sm:w-1/2 px-4 py-2 rounded-full bg-white/10 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition">
-           <option>كل الفئات</option>
-            <option>PC</option>
-            <option>Laptop</option>
-            <option>هواتف</option>
-            <option>Consoles</option>
-            <option>إكسسوارات</option>
-            <option>شاشات</option>
-          </select>
         </div>
-
 
         <!-- يمين: أزرار التسجيل -->
         <div id="authBtns" class="flex gap-3">
@@ -243,10 +197,6 @@
         }
       });
     });
-  <script type="module" src="js/firebase-config.js"></script>
   </script>
 </body>
 </html>
-
-
-
