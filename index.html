@@ -191,52 +191,46 @@
   </div>
 
   <!-- ✅ Firebase -->
-  <script type="module">
-    import { auth } from "./firebase-config.js";
-    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+ <script type="module">
+  import { auth } from "./firebase-config.js";
+  import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
-    const authBtns = document.getElementById("authBtns");
-    const userName = document.getElementById("userNameHeader");
-    const userPhoto = document.getElementById("userPhoto");
-    const addProductBtn = document.getElementById("addProductBtn");
-    const userDropdown = document.getElementById("userDropdown");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const userBtn = document.getElementById("userBtn");
+  const authBtns = document.getElementById("authBtns");
+  const userName = document.getElementById("userNameHeader");
+  const userPhoto = document.getElementById("userPhoto");
+  const addProductBtn = document.getElementById("addProductBtn");
+  const userDropdown = document.getElementById("userDropdown");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const userBtn = document.getElementById("userBtn");
 
-    // 🔥 تحديث حالة المستخدم
-   document.addEventListener("DOMContentLoaded", () => {
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // ✅ المستخدم مسجل دخول
-      authBtns.classList.add("hidden");
-      addProductBtn.classList.remove("hidden");
-      // ✅ إظهار اسم المستخدم أو البريد الإلكتروني
-userName.textContent = user.displayName || user.email.split("@")[0] || "مستخدم";
-      userPhoto.src = user.photoURL || "./assets/default-avatar.png";
-    } else {
-      // 🚫 المستخدم غير مسجل دخول
-      authBtns.classList.remove("hidden");
-      addProductBtn.classList.add("hidden");
-      userName.textContent = "الضيف";
-      userPhoto.src = "./assets/default-avatar.png";
-    }
-  });
-});
+  // 🔥 عند تحميل الصفحة
+  document.addEventListener("DOMContentLoaded", () => {
+    // ✅ راقب حالة تسجيل الدخول
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // ✅ المستخدم مسجل دخول
+        authBtns.classList.add("hidden");
+        addProductBtn.classList.remove("hidden");
+        userBtn.classList.remove("hidden"); // 🔹 تأكد من ظهور الصورة واسم المستخدم
 
-    // ✅ فتح/إغلاق القائمة
-    userBtn.addEventListener("click", () => userDropdown.classList.toggle("hidden"));
+        // ✅ إظهار الاسم أو البريد
+        userName.textContent = user.displayName || user.email.split("@")[0] || "مستخدم";
+        userPhoto.src = user.photoURL || "./assets/default-avatar.png";
+      } else {
+        // 🚫 المستخدم غير مسجل
+        authBtns.classList.remove("hidden");
+        addProductBtn.classList.add("hidden");
+        userBtn.classList.add("hidden"); // 🔹 إخفاء زر الصورة عند عدم تسجيل الدخول
+        userName.textContent = "الضيف";
+        userPhoto.src = "./assets/default-avatar.png";
+      }
+    });
 
-    // ✅ تسجيل الخروج
-   logoutBtn.addEventListener("click", async () => {
-  try {
-    await signOut(auth);
-    alert("✅ تم تسجيل الخروج بنجاح");
-    window.location.href = "login.html"; // يعيد المستخدم إلى صفحة تسجيل الدخول
-  } catch (error) {
-    console.error("خطأ أثناء تسجيل الخروج:", error);
-    alert("❌ حدث خطأ أثناء تسجيل الخروج");
-  }
-});
+    // ✅ فتح/إغلاق القائمة المنسدلة عند الضغط على الصورة
+    userBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      userDropdown.classList.toggle("hidden");
+    });
 
     // ✅ إغلاق القائمة عند الضغط خارجها
     document.addEventListener("click", (e) => {
@@ -244,7 +238,20 @@ userName.textContent = user.displayName || user.email.split("@")[0] || "مستخ
         userDropdown.classList.add("hidden");
       }
     });
-  </script>
+
+    // ✅ تسجيل الخروج
+    logoutBtn.addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        alert("✅ تم تسجيل الخروج بنجاح");
+        window.location.href = "login.html"; // يرجع لصفحة تسجيل الدخول
+      } catch (error) {
+        console.error("خطأ أثناء تسجيل الخروج:", error);
+        alert("❌ حدث خطأ أثناء تسجيل الخروج");
+      }
+    });
+  });
+</script>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -277,6 +284,7 @@ userName.textContent = user.displayName || user.email.split("@")[0] || "مستخ
   </script>
 </body>
 </html>
+
 
 
 
