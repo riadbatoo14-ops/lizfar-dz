@@ -222,10 +222,16 @@
     userBtn.addEventListener("click", () => userDropdown.classList.toggle("hidden"));
 
     // ✅ تسجيل الخروج
-    logoutBtn.addEventListener("click", async () => {
-      await signOut(auth);
-      location.reload();
-    });
+   logoutBtn.addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+    alert("✅ تم تسجيل الخروج بنجاح");
+    window.location.href = "login.html"; // يعيد المستخدم إلى صفحة تسجيل الدخول
+  } catch (error) {
+    console.error("خطأ أثناء تسجيل الخروج:", error);
+    alert("❌ حدث خطأ أثناء تسجيل الخروج");
+  }
+});
 
     // ✅ إغلاق القائمة عند الضغط خارجها
     document.addEventListener("click", (e) => {
@@ -266,3 +272,4 @@
   </script>
 </body>
 </html>
+
