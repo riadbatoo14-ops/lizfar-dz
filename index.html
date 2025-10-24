@@ -144,7 +144,18 @@
     <main class="flex-1 p-6 lg:pl-8">
       <!-- Header -->
       <header class="flex flex-wrap items-center justify-between mb-8 gap-4">
+    <!-- 👤 زر المستخدم -->
+<div class="relative">
+  <button id="userBtn" class="hidden flex items-center space-x-2">
+    <img id="userPhoto" src="./assets/default-avatar.png" alt="User" class="w-10 h-10 rounded-full border border-gray-300" />
+  </button>
 
+  <!-- 🔽 القائمة المنسدلة -->
+  <div id="userDropdown" class="hidden absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-xl border border-gray-100 overflow-hidden z-50">
+    <a href="profile.html" class="block px-4 py-2 hover:bg-gray-100 text-gray-700">الملف الشخصي</a>
+    <button id="logoutBtn" class="w-full text-right px-4 py-2 hover:bg-red-100 text-red-600">تسجيل الخروج</button>
+  </div>
+</div>
         <!-- يسار: المستخدم + عرض منتجك -->
         <div class="flex items-center gap-4">
           <div class="relative" id="userMenu">
@@ -290,6 +301,7 @@ onAuthStateChanged(auth, (user) => {
   </script>
 </body>
 </html>
+
 
 
 
