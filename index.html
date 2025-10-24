@@ -203,66 +203,51 @@
   const logoutBtn = document.getElementById("logoutBtn");
   const userBtn = document.getElementById("userBtn");
 
-  // 🔥 عند تحميل الصفحة
-  document.addEventListener("DOMContentLoaded", () => {
-    // ✅ راقب حالة تسجيل الدخول
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // ✅ المستخدم مسجل دخول
-        authBtns.classList.add("hidden");
-        addProductBtn.classList.remove("hidden");
-        userBtn.classList.remove("hidden"); // 🔹 تأكد من ظهور الصورة واسم المستخدم
+  // ✅ راقب حالة تسجيل الدخول
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // ✅ المستخدم مسجل الدخول
+      authBtns.classList.add("hidden"); // إخفاء أزرار التسجيل
+      addProductBtn.classList.remove("hidden"); // إظهار زر عرض منتجك
+      userBtn.classList.remove("hidden"); // إظهار صورة المستخدم فقط
 
-        /// ✅ عند تسجيل الدخول
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // ✅ المستخدم مسجل الدخول
-    authBtns.classList.add("hidden"); // إخفاء أزرار التسجيل
-    addProductBtn.classList.remove("hidden");
-    userBtn.classList.remove("hidden");
-
-    // ✅ إظهار الاسم بجانب الصورة
-    const displayName =
-      user.displayName || user.email.split("@")[0] || "مستخدم";
-    userName.textContent = displayName;
-    userPhoto.src = user.photoURL || "./assets/default-avatar.png";
-  } else {
-    // 🚫 المستخدم غير مسجل
-    authBtns.classList.remove("hidden");
-    addProductBtn.classList.add("hidden");
-    userBtn.classList.add("hidden");
-    userName.textContent = "الضيف";
-    userPhoto.src = "./assets/default-avatar.png";
-  }
-});
-
-    });
-
-    // ✅ فتح/إغلاق القائمة المنسدلة عند الضغط على الصورة
-    userBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      userDropdown.classList.toggle("hidden");
-    });
-
-    // ✅ إغلاق القائمة عند الضغط خارجها
-    document.addEventListener("click", (e) => {
-      if (!userDropdown.contains(e.target) && !userBtn.contains(e.target)) {
-        userDropdown.classList.add("hidden");
-      }
-    });
-
-    // ✅ تسجيل الخروج
-    logoutBtn.addEventListener("click", async () => {
-      try {
-        await signOut(auth);
-        alert("✅ تم تسجيل الخروج بنجاح");
-        window.location.href = "login.html"; // يرجع لصفحة تسجيل الدخول
-      } catch (error) {
-        console.error("خطأ أثناء تسجيل الخروج:", error);
-        alert("❌ حدث خطأ أثناء تسجيل الخروج");
-      }
-    });
+      // ❌ لا نعرض الاسم بجانب الصورة
+      userName.textContent = "";
+      userPhoto.src = user.photoURL || "./assets/default-avatar.png";
+    } else {
+      // 🚫 المستخدم غير مسجل
+      authBtns.classList.remove("hidden"); // إظهار أزرار التسجيل
+      addProductBtn.classList.add("hidden");
+      userBtn.classList.add("hidden");
+      userPhoto.src = "./assets/default-avatar.png";
+    }
   });
+
+  // ✅ فتح/إغلاق القائمة المنسدلة عند الضغط على الصورة
+  userBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    userDropdown.classList.toggle("hidden");
+  });
+
+  // ✅ إغلاق القائمة عند الضغط خارجها
+  document.addEventListener("click", (e) => {
+    if (!userDropdown.contains(e.target) && !userBtn.contains(e.target)) {
+      userDropdown.classList.add("hidden");
+    }
+  });
+
+  // ✅ تسجيل الخروج
+  logoutBtn.addEventListener("click", async () => {
+    try {
+      await signOut(auth);
+      alert("✅ تم تسجيل الخروج بنجاح");
+      window.location.href = "login.html";
+    } catch (error) {
+      console.error("خطأ أثناء تسجيل الخروج:", error);
+      alert("❌ حدث خطأ أثناء تسجيل الخروج");
+    }
+  });
+</script>
    // ✅ تأكيد إخفاء أزرار التسجيل بعد تسجيل الدخول
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -303,6 +288,7 @@ onAuthStateChanged(auth, (user) => {
   </script>
 </body>
 </html>
+
 
 
 
