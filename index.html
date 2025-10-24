@@ -213,17 +213,29 @@
         addProductBtn.classList.remove("hidden");
         userBtn.classList.remove("hidden"); // 🔹 تأكد من ظهور الصورة واسم المستخدم
 
-        // ✅ إظهار الاسم أو البريد
-        userName.textContent = user.displayName || user.email.split("@")[0] || "مستخدم";
-        userPhoto.src = user.photoURL || "./assets/default-avatar.png";
-      } else {
-        // 🚫 المستخدم غير مسجل
-        authBtns.classList.remove("hidden");
-        addProductBtn.classList.add("hidden");
-        userBtn.classList.add("hidden"); // 🔹 إخفاء زر الصورة عند عدم تسجيل الدخول
-        userName.textContent = "الضيف";
-        userPhoto.src = "./assets/default-avatar.png";
-      }
+        /// ✅ عند تسجيل الدخول
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // ✅ المستخدم مسجل الدخول
+    authBtns.classList.add("hidden"); // إخفاء أزرار التسجيل
+    addProductBtn.classList.remove("hidden");
+    userBtn.classList.remove("hidden");
+
+    // ✅ إظهار الاسم بجانب الصورة
+    const displayName =
+      user.displayName || user.email.split("@")[0] || "مستخدم";
+    userName.textContent = displayName;
+    userPhoto.src = user.photoURL || "./assets/default-avatar.png";
+  } else {
+    // 🚫 المستخدم غير مسجل
+    authBtns.classList.remove("hidden");
+    addProductBtn.classList.add("hidden");
+    userBtn.classList.add("hidden");
+    userName.textContent = "الضيف";
+    userPhoto.src = "./assets/default-avatar.png";
+  }
+});
+
     });
 
     // ✅ فتح/إغلاق القائمة المنسدلة عند الضغط على الصورة
@@ -291,6 +303,7 @@ onAuthStateChanged(auth, (user) => {
   </script>
 </body>
 </html>
+
 
 
 
