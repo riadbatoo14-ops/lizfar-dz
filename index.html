@@ -251,6 +251,13 @@
       }
     });
   });
+   // ✅ تأكيد إخفاء أزرار التسجيل بعد تسجيل الدخول
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const authBtns = document.getElementById("authBtns");
+    if (authBtns) authBtns.classList.add("hidden");
+  }
+});
 </script>
 
   <script>
@@ -284,6 +291,7 @@
   </script>
 </body>
 </html>
+
 
 
 
