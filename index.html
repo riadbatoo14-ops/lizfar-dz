@@ -191,7 +191,7 @@
   </div>
 
   <!-- ✅ Firebase -->
- <script type="module">
+<script type="module">
   import { auth } from "./firebase-config.js";
   import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
@@ -209,27 +209,28 @@
       // ✅ المستخدم مسجل الدخول
       authBtns.classList.add("hidden"); // إخفاء أزرار التسجيل
       addProductBtn.classList.remove("hidden"); // إظهار زر عرض منتجك
-      userBtn.classList.remove("hidden"); // إظهار صورة المستخدم فقط
+      userBtn.classList.remove("hidden"); // إظهار زر المستخدم
 
-      // ❌ لا نعرض الاسم بجانب الصورة
-      userName.textContent = "";
+      // ❌ إخفاء الاسم بجانب الصورة
+      userName.classList.add("hidden");
       userPhoto.src = user.photoURL || "./assets/default-avatar.png";
     } else {
       // 🚫 المستخدم غير مسجل
       authBtns.classList.remove("hidden"); // إظهار أزرار التسجيل
       addProductBtn.classList.add("hidden");
       userBtn.classList.add("hidden");
+      userName.classList.remove("hidden");
+      userName.textContent = "الضيف";
       userPhoto.src = "./assets/default-avatar.png";
     }
   });
 
-  // ✅ فتح/إغلاق القائمة المنسدلة عند الضغط على الصورة
+  // ✅ فتح/إغلاق القائمة المنسدلة
   userBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     userDropdown.classList.toggle("hidden");
   });
 
-  // ✅ إغلاق القائمة عند الضغط خارجها
   document.addEventListener("click", (e) => {
     if (!userDropdown.contains(e.target) && !userBtn.contains(e.target)) {
       userDropdown.classList.add("hidden");
@@ -248,6 +249,7 @@
     }
   });
 </script>
+
    // ✅ تأكيد إخفاء أزرار التسجيل بعد تسجيل الدخول
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -288,6 +290,7 @@ onAuthStateChanged(auth, (user) => {
   </script>
 </body>
 </html>
+
 
 
 
