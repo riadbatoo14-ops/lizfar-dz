@@ -48,7 +48,6 @@
             <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="pc-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-            <!-- English sub-items -->
             <button class="w-full text-right px-3 py-2 rounded-md side-item">Builds</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">Graphics Cards</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">CPUs</button>
@@ -67,7 +66,6 @@
             <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="laptop-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-            <!-- English sub-items -->
             <button class="w-full text-right px-3 py-2 rounded-md side-item">HP</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">Dell</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">Lenovo</button>
@@ -84,7 +82,6 @@
             <svg class="chev w-4 h-4 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="phone-submenu mt-2 mr-2 ml-2 hidden space-y-1 text-sm">
-            <!-- English sub-items -->
             <button class="w-full text-right px-3 py-2 rounded-md side-item">Samsung</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">Xiaomi</button>
             <button class="w-full text-right px-3 py-2 rounded-md side-item">Huawei</button>
@@ -136,30 +133,15 @@
             <button class="w-full text-right px-3 py-2 rounded-md side-item">Office</button>
           </div>
         </div>
-
       </nav>
     </aside>
 
     <!-- Main -->
     <main class="flex-1 p-6 lg:pl-8">
-      <!-- Header -->
       <header class="flex flex-wrap items-center justify-between mb-8 gap-4">
-    <!-- 👤 زر المستخدم -->
-<div class="relative">
-  <button id="userBtn" class="hidden flex items-center space-x-2">
-    <img id="userPhoto" src="./assets/default-avatar.png" alt="User" class="w-10 h-10 rounded-full border border-gray-300" />
-  </button>
-
-  <!-- 🔽 القائمة المنسدلة -->
-  <div id="userDropdown" class="hidden absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-xl border border-gray-100 overflow-hidden z-50">
-    <a href="profile.html" class="block px-4 py-2 hover:bg-gray-100 text-gray-700">الملف الشخصي</a>
-    <button id="logoutBtn" class="w-full text-right px-4 py-2 hover:bg-red-100 text-red-600">تسجيل الخروج</button>
-  </div>
-</div>
-        <!-- يسار: المستخدم + عرض منتجك -->
         <div class="flex items-center gap-4">
           <div class="relative" id="userMenu">
-            <button id="userBtn" class="flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 hover:bg-white/20 transition">
+            <button id="userBtn" class="flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 hover:bg-white/20 transition hidden">
               <img id="userPhoto" src="./assets/default-avatar.png" alt="User" class="w-8 h-8 rounded-full object-cover">
               <span id="userNameHeader" class="text-sm font-medium">الضيف</span>
             </button>
@@ -168,28 +150,21 @@
               <button id="logoutBtn" class="w-full text-left px-4 py-2 hover:bg-gray-800 text-red-400">تسجيل الخروج</button>
             </div>
           </div>
-
-          <!-- زر عرض منتجك -->
-          <a id="addProductBtn" href="add-product.html"
-             class="hidden bg-yellow-400 text-black font-semibold px-4 py-2 rounded-full hover:bg-yellow-300 transition shadow-md">
+          <a id="addProductBtn" href="add-product.html" class="hidden bg-yellow-400 text-black font-semibold px-4 py-2 rounded-full hover:bg-yellow-300 transition shadow-md">
              + عرض منتجك
           </a>
         </div>
 
-        <!-- 🔍 شريط البحث في المنتصف -->
         <div class="flex-1 flex justify-center order-last sm:order-none">
-          <input type="text" placeholder="ابحث عن منتج أو فئة..."
-                 class="w-full sm:w-1/2 px-4 py-2 rounded-full bg-white/10 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition">
+          <input type="text" placeholder="ابحث عن منتج أو فئة..." class="w-full sm:w-1/2 px-4 py-2 rounded-full bg-white/10 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition">
         </div>
 
-        <!-- يمين: أزرار التسجيل -->
         <div id="authBtns" class="flex gap-3">
           <a href="signup.html" class="px-4 py-2 rounded-full bg-yellow-400 text-black font-semibold">إنشاء حساب</a>
           <a href="login.html" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition">تسجيل الدخول</a>
         </div>
       </header>
 
-      <!-- Offers -->
       <section>
         <h2 class="text-2xl font-semibold mb-4">🔥 أفضل العروض</h2>
         <div id="offersSection" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
@@ -202,73 +177,70 @@
   </div>
 
   <!-- ✅ Firebase -->
-<script type="module">
-  import { auth } from "./firebase-config.js";
-  import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+  <script type="module">
+    import { auth } from "./firebase-config.js";
+    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
-  const authBtns = document.getElementById("authBtns");
-  const userName = document.getElementById("userNameHeader");
-  const userPhoto = document.getElementById("userPhoto");
-  const addProductBtn = document.getElementById("addProductBtn");
-  const userDropdown = document.getElementById("userDropdown");
-  const logoutBtn = document.getElementById("logoutBtn");
-  const userBtn = document.getElementById("userBtn");
-
-  // ✅ راقب حالة تسجيل الدخول
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // ✅ المستخدم مسجل الدخول
-      authBtns.classList.add("hidden"); // إخفاء أزرار التسجيل
-      addProductBtn.classList.remove("hidden"); // إظهار زر عرض منتجك
-      userBtn.classList.remove("hidden"); // إظهار زر المستخدم
-
-      // ❌ إخفاء الاسم بجانب الصورة
-      userName.classList.add("hidden");
-      userPhoto.src = user.photoURL || "./assets/default-avatar.png";
-    } else {
-      // 🚫 المستخدم غير مسجل
-      authBtns.classList.remove("hidden"); // إظهار أزرار التسجيل
-      addProductBtn.classList.add("hidden");
-      userBtn.classList.add("hidden");
-      userName.classList.remove("hidden");
-      userName.textContent = "الضيف";
-      userPhoto.src = "./assets/default-avatar.png";
-    }
-  });
-
-  // ✅ فتح/إغلاق القائمة المنسدلة
-  userBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    userDropdown.classList.toggle("hidden");
-  });
-
-  document.addEventListener("click", (e) => {
-    if (!userDropdown.contains(e.target) && !userBtn.contains(e.target)) {
-      userDropdown.classList.add("hidden");
-    }
-  });
-
-  // ✅ تسجيل الخروج
-  logoutBtn.addEventListener("click", async () => {
-    try {
-      await signOut(auth);
-      alert("✅ تم تسجيل الخروج بنجاح");
-      window.location.href = "login.html";
-    } catch (error) {
-      console.error("خطأ أثناء تسجيل الخروج:", error);
-      alert("❌ حدث خطأ أثناء تسجيل الخروج");
-    }
-  });
-</script>
-
-   // ✅ تأكيد إخفاء أزرار التسجيل بعد تسجيل الدخول
-onAuthStateChanged(auth, (user) => {
-  if (user) {
     const authBtns = document.getElementById("authBtns");
-    if (authBtns) authBtns.classList.add("hidden");
-  }
-});
-</script>
+    const userName = document.getElementById("userNameHeader");
+    const userPhoto = document.getElementById("userPhoto");
+    const addProductBtn = document.getElementById("addProductBtn");
+    const userDropdown = document.getElementById("userDropdown");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const userBtn = document.getElementById("userBtn");
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        authBtns.classList.add("hidden");
+        addProductBtn.classList.remove("hidden");
+        userBtn.classList.remove("hidden");
+        userName.classList.add("hidden");
+        userPhoto.src = user.photoURL || "./assets/default-avatar.png";
+      } else {
+        authBtns.classList.remove("hidden");
+        addProductBtn.classList.add("hidden");
+        userBtn.classList.add("hidden");
+        userName.classList.remove("hidden");
+        userName.textContent = "الضيف";
+        userPhoto.src = "./assets/default-avatar.png";
+      }
+    });
+
+    userBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      userDropdown.classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!userDropdown.contains(e.target) && !userBtn.contains(e.target)) {
+        userDropdown.classList.add("hidden");
+      }
+    });
+
+    logoutBtn.addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        alert("✅ تم تسجيل الخروج بنجاح");
+        window.location.href = "login.html";
+      } catch (error) {
+        console.error("خطأ أثناء تسجيل الخروج:", error);
+        alert("❌ حدث خطأ أثناء تسجيل الخروج");
+      }
+    });
+  </script>
+
+  <!-- ✅ إضافة إخفاء أزرار التسجيل بعد تسجيل الدخول -->
+  <script type="module">
+    import { auth, onAuthStateChanged } from "./firebase-config.js";
+    onAuthStateChanged(auth, (user) => {
+      const authBtns = document.getElementById("authBtns");
+      if (user) {
+        authBtns?.classList.add("hidden");
+      } else {
+        authBtns?.classList.remove("hidden");
+      }
+    });
+  </script>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -280,38 +252,18 @@ onAuthStateChanged(auth, (user) => {
         {btn: '.acc-toggle', menu: '.acc-submenu'},
         {btn: '.screens-toggle', menu: '.screens-submenu'},
       ];
-
       toggles.forEach(t => {
         const btn = document.querySelector(t.btn);
         const menu = document.querySelector(t.menu);
         const icon = btn?.querySelector('.chev');
         if (btn && menu) {
           btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-            icon?.classList.toggle('open');
+            menu.classList.toggle("hidden");
+            icon?.classList.toggle("open");
           });
         }
       });
-
-      // User menu
-      const userBtn = document.getElementById("userBtn");
-      const dropdown = document.getElementById("userDropdown");
-      userBtn.addEventListener("click", () => dropdown.classList.toggle("hidden"));
     });
-    <!-- ✅ تأكيد إخفاء أزرار تسجيل الدخول وإنشاء الحساب بعد تسجيل الدخول -->
-<script type="module">
-  import { auth, onAuthStateChanged } from "./firebase-config.js";
-
-  onAuthStateChanged(auth, (user) => {
-    const authBtns = document.getElementById("authBtns");
-    if (user) {
-      authBtns?.classList.add("hidden");
-    } else {
-      authBtns?.classList.remove("hidden");
-    }
-  });
-</script>
-
   </script>
 </body>
 </html>
