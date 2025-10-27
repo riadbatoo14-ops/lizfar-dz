@@ -298,15 +298,20 @@ onAuthStateChanged(auth, (user) => {
       const dropdown = document.getElementById("userDropdown");
       userBtn.addEventListener("click", () => dropdown.classList.toggle("hidden"));
     });
+    <!-- ✅ تأكيد إخفاء أزرار تسجيل الدخول وإنشاء الحساب بعد تسجيل الدخول -->
+<script type="module">
+  import { auth, onAuthStateChanged } from "./firebase-config.js";
+
+  onAuthStateChanged(auth, (user) => {
+    const authBtns = document.getElementById("authBtns");
+    if (user) {
+      authBtns?.classList.add("hidden");
+    } else {
+      authBtns?.classList.remove("hidden");
+    }
+  });
+</script>
+
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
